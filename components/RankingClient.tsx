@@ -127,7 +127,8 @@ function formatUpdated(iso: string): string {
   try {
     return new Date(iso).toLocaleString('es-CO', {
       day: '2-digit', month: 'short', year: 'numeric',
-      hour: '2-digit', minute: '2-digit', timeZone: 'America/Bogota',
+      hour: '2-digit', minute: '2-digit',
+      timeZone: 'America/Bogota',
     });
   } catch { return ''; }
 }
@@ -143,7 +144,14 @@ export default function RankingClient({ initialData, initialTotal, updatedAt }: 
     <>
       {/* Hero stats */}
       <section className="hero">
-        <div className="hero-tag"><div className="dot" /> Competencia en vivo</div>
+        {updatedAt ? (
+          <div className="hero-tag">
+            <div className="dot" />
+            Actualizado: {formatUpdated(updatedAt)}
+          </div>
+        ) : (
+          <div style={{ marginBottom: '28px' }} />
+        )}
         <h1>¿Quién va<br />ganando? 🏆</h1>
         <p className="hero-sub">
           Refiere a tus amigos, sube en el ranking y gana premios épicos. Los mejores puestos ganan
@@ -163,12 +171,6 @@ export default function RankingClient({ initialData, initialTotal, updatedAt }: 
             <div className="stat-l">Máx. referidos</div>
           </div>
         </div>
-        {updatedAt && (
-          <div className="updated-badge">
-            <span className="updated-dot" />
-            Actualizado: {formatUpdated(updatedAt)}
-          </div>
-        )}
       </section>
 
       {/* Ranking section */}
