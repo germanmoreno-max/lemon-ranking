@@ -116,9 +116,20 @@ function Table({ data }: TableProps) {
 interface RankingClientProps {
   initialData: RankingEntry[];
   initialTotal: number;
+  updatedAt: string;
 }
 
-export default function RankingClient({ initialData, initialTotal }: RankingClientProps) {
+function formatUpdated(iso: string): string {
+  if (!iso) return '';
+  try {
+    return new Date(iso).toLocaleString('es-CO', {
+      day: '2-digit', month: 'short', year: 'numeric',
+      hour: '2-digit', minute: '2-digit', timeZone: 'America/Bogota',
+    });
+  } catch { return ''; }
+}
+
+export default function RankingClient({ initialData, initialTotal, updatedAt }: RankingClientProps) {
   const data = initialData;
   const total = initialTotal;
 
@@ -149,6 +160,12 @@ export default function RankingClient({ initialData, initialTotal }: RankingClie
             <div className="stat-l">Máx. referidos</div>
           </div>
         </div>
+        {updatedAt && (
+          <div className="updated-badge">
+            <span className="updated-dot" />
+            Actualizado: {formatUpdated(updatedAt)}
+          </div>
+        )}
       </section>
 
       {/* Ranking section */}
