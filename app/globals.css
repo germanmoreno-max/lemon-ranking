@@ -367,7 +367,7 @@ nav {
 .c-refs {
   display: flex; flex-direction: column; align-items: center; gap: 1px;
 }
-.c-refs-n   { font-size: 20px; font-weight: 900; color: var(--green); letter-spacing: -0.5px; line-height: 1; }
+.c-refs-n   { font-size: 20px; font-weight: 900; color: #fff; letter-spacing: -0.5px; line-height: 1; }
 .c-refs-lbl { font-size: 10px; font-weight: 600; color: #333; text-transform: uppercase; letter-spacing: 0.8px; }
 
 .c-pts-wrap { text-align: right; }
@@ -385,6 +385,7 @@ nav {
 .ps-bronze { background: rgba(205,127,50,.08); color: var(--bronze); border: 1px solid rgba(205,127,50,.15); }
 .ps-jersey { background: rgba(255,220,0,.08); color: #d4a900; border: 1px solid rgba(255,220,0,.15); }
 .ps-merch  { background: rgba(0,240,104,.06); color: rgba(0,240,104,.5); border: 1px solid rgba(0,240,104,.12); }
+.ps-mini   { background: rgba(255,255,255,.04); color: #444; border: 1px solid #222; }
 
 /* ─── FAB ─── */
 .fab {

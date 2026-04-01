@@ -22,8 +22,9 @@ function fmt(n: number): string {
 
 function prizeLabel(rank: number): [string, string] | null {
   if (rank <= 3) return null;
-  if (rank === 4 || rank === 5) return ['ps-jersey', '🇨🇴 Camiseta + Cash'];
-  if (rank <= 50) return ['ps-merch', '🍋 Merch Lemon'];
+  if (rank <= 5)  return ['ps-jersey', '🇨🇴 Camiseta + 100 USD'];
+  if (rank <= 20) return ['ps-merch',  '🛍️ Kit completo'];
+  if (rank <= 50) return ['ps-mini',   '🍋 Mini kit'];
   return null;
 }
 
