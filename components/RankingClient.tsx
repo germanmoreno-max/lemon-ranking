@@ -1,6 +1,5 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
 import { RankingEntry } from '../types';
 
 // ─── Helper functions ───────────────────────────────────────────────────────
@@ -31,55 +30,6 @@ function prizeLabel(rank: number): [string, string] | null {
   if (rank === 4 || rank === 5) return ['ps-jersey', '🇨🇴 Camiseta + Cash'];
   if (rank <= 50) return ['ps-merch', '🍋 Merch Lemon'];
   return null;
-}
-
-// ─── CSV parser — handles ViralSweep column-shift bug ──────────────────────
-
-function parseLine(line: string): string[] {
-  const cols: string[] = [];
-  let cur = '';
-  let inq = false;
-  for (const c of line) {
-    if (c === '"') {
-      inq = !inq;
-    } else if (c === ',' && !inq) {
-      cols.push(cur);
-      cur = '';
-    } else {
-      cur += c;
-    }
-  }
-  cols.push(cur);
-  return cols;
-}
-
-function parseCSV(text: string): RankingEntry[] {
-  const lines = text.split('\n').filter((l) => l.trim());
-  const rows: RankingEntry[] = [];
-  for (let i = 1; i < lines.length; i++) {
-    const c = parseLine(lines[i]);
-    if (c.length < 10) continue;
-    const shifted = c[12].trim() === '' && (c[13] || '').toLowerCase().includes('full page');
-    const ri = shifted ? 14 : 13;
-    const fe = (s: string) => {
-      try {
-        return decodeURIComponent(escape(s || ''));
-      } catch {
-        return s || '';
-      }
-    };
-    const email = (c[0] || '').trim();
-    if (!email) continue;
-    rows.push({
-      email,
-      first: fe((c[10] || '').trim()),
-      last: fe((c[11] || '').trim()),
-      location: fe((c[2] || '').trim()),
-      total: parseInt(c[9] || '0') || 0,
-      referrals: parseInt(c[ri] || '0') || 0,
-    });
-  }
-  return rows.sort((a, b) => b.total - a.total);
 }
 
 // ─── Podium ─────────────────────────────────────────────────────────────────
@@ -179,65 +129,8 @@ interface RankingClientProps {
 }
 
 export default function RankingClient({ initialData, initialTotal }: RankingClientProps) {
-  const [data, setData] = useState<RankingEntry[]>(initialData);
-  const [total, setTotal] = useState<number>(initialTotal);
-  const [fdate, setFdate] = useState<string>('27 Mar 2026');
-  const [dropVisible, setDropVisible] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const handleCSVLoaded = useCallback((text: string, encoding: string = 'ISO-8859-1') => {
-    const rows = parseCSV(text);
-    const now = new Date().toLocaleDateString('es-CO', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric',
-    });
-    setFdate(now);
-    setData(rows);
-    setTotal(rows.length);
-  }, []);
-
-  const loadCSV = useCallback((input: HTMLInputElement) => {
-    const f = input.files?.[0];
-    if (!f) return;
-    const r = new FileReader();
-    r.onload = (e) => {
-      handleCSVLoaded(e.target?.result as string);
-    };
-    r.readAsText(f, 'ISO-8859-1');
-  }, [handleCSVLoaded]);
-
-  useEffect(() => {
-    const handleDragOver = (e: DragEvent) => {
-      e.preventDefault();
-      setDropVisible(true);
-    };
-    const handleDragLeave = (e: DragEvent) => {
-      if (!e.relatedTarget) setDropVisible(false);
-    };
-    const handleDrop = (e: DragEvent) => {
-      e.preventDefault();
-      setDropVisible(false);
-      const f = e.dataTransfer?.files[0];
-      if (f?.name.endsWith('.csv')) {
-        const r = new FileReader();
-        r.onload = (ev) => {
-          handleCSVLoaded(ev.target?.result as string);
-        };
-        r.readAsText(f, 'ISO-8859-1');
-      }
-    };
-
-    document.addEventListener('dragover', handleDragOver);
-    document.addEventListener('dragleave', handleDragLeave);
-    document.addEventListener('drop', handleDrop);
-
-    return () => {
-      document.removeEventListener('dragover', handleDragOver);
-      document.removeEventListener('dragleave', handleDragLeave);
-      document.removeEventListener('drop', handleDrop);
-    };
-  }, [handleCSVLoaded]);
+  const data = initialData;
+  const total = initialTotal;
 
   const leader = data[0];
   const maxRefs = data[0]?.referrals || 0;
@@ -278,34 +171,9 @@ export default function RankingClient({ initialData, initialTotal }: RankingClie
         </div>
       </section>
 
-      {/* FAB */}
-      <button
-        className="fab"
-        onClick={() => fileInputRef.current?.click()}
-      >
-        ↑ Actualizar datos
-      </button>
-      <input
-        type="file"
-        id="csv-in"
-        accept=".csv"
-        ref={fileInputRef}
-        style={{ display: 'none' }}
-        onChange={(e) => loadCSV(e.target)}
-      />
-
-      {/* Drop overlay */}
-      <div className={`drop-ov${dropVisible ? ' on' : ''}`}>
-        <div className="drop-box">
-          <div style={{ fontSize: '52px' }}>📂</div>
-          <div className="drop-t">Soltá el CSV acá</div>
-          <div className="drop-s">Export de ViralSweep · el ranking se actualiza al instante</div>
-        </div>
-      </div>
-
       {/* Footer date */}
       <footer>
-        Lemon Card Colombia · Waiting List Competition · Actualizado: <span id="fdate">{fdate}</span>
+        Lemon Card Colombia · Waiting List Competition
       </footer>
     </>
   );
