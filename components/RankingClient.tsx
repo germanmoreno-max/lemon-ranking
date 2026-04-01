@@ -8,6 +8,13 @@ function ini(f: string, l: string): string {
   return ((f || '')[0] || '').toUpperCase() + ((l || '')[0] || '').toUpperCase();
 }
 
+// "María Fernanda" + "Rodríguez Pérez" → "María R."
+function shortName(f: string, l: string): string {
+  const firstName = (f || '').trim().split(/\s+/)[0] || '';
+  const lastInitial = ((l || '').trim()[0] || '').toUpperCase();
+  return lastInitial ? `${firstName} ${lastInitial}.` : firstName;
+}
+
 
 function fmt(n: number): string {
   return n.toLocaleString('es-CO');
@@ -43,7 +50,7 @@ function Podium({ data }: PodiumProps) {
             <span className="pod-medal">{medal}</span>
             <div className="pod-pos">{pos}</div>
             <div className="pod-av">{ini(d.first, d.last)}</div>
-            <div className="pod-name">{d.first} {d.last}</div>
+            <div className="pod-name">{shortName(d.first, d.last)}</div>
             <div className="pod-pts">{fmt(d.total)}</div>
             <div className="pod-pts-lbl">puntos</div>
             <div className="pod-refs"><strong>{d.referrals}</strong> referidos</div>
@@ -83,7 +90,7 @@ function Table({ data }: TableProps) {
               <div className="c-user">
                 <div className="av-sm">{ini(d.first, d.last)}</div>
                 <div>
-                  <div className="u-name">{d.first} {d.last}</div>
+                  <div className="u-name">{shortName(d.first, d.last)}</div>
                 </div>
               </div>
               <div className="c-refs">{d.referrals} refs</div>
