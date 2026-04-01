@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ranking — Lemon Card Colombia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --green: #C9FF33;
+  --black: #0d0d0d;
+  --card-bg: #1a1a1a;
+  --border: #2a2a2a;
+  --muted: #777;
+  --gold: #FFE600;
+  --silver: #C0C0C0;
+  --bronze: #CD7F32;
+}
+
+body {
+  background: var(--green);
+  color: var(--black);
+  font-family: 'Inter', -apple-system, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  background: var(--green);
+  padding: 0 32px;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 2px solid rgba(0,0,0,0.1);
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+}
+
+.lemon-logo {
+  display: flex; align-items: center; gap: 10px;
+}
+
+.lemon-icon {
+  width: 36px; height: 36px;
+  background: var(--black); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.lemon-icon svg { width: 22px; height: 22px; fill: var(--green); }
+
+.lemon-wordmark {
+  font-size: 22px; font-weight: 900; letter-spacing: -0.5px;
+  color: var(--black); text-transform: uppercase;
+}
+
+.nav-cta {
+  background: var(--black); color: var(--green);
+  border: none; padding: 10px 22px; border-radius: 100px;
+  font-weight: 800; font-size: 14px; cursor: pointer;
+  text-decoration: none; letter-spacing: -0.2px;
+  transition: opacity .15s;
+}
+.nav-cta:hover { opacity: .85; }
+
+/* ─── HERO ─── */
+.hero {
+  background: var(--green);
+  padding: 56px 24px 48px;
+  text-align: center;
+}
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--black); color: var(--green);
+  border-radius: 100px; padding: 6px 16px;
+  font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 28px;
+}
+.dot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+.hero h1 {
+  font-size: clamp(40px, 7vw, 80px);
+  font-weight: 900; font-style: italic;
+  line-height: 0.95; letter-spacing: -3px;
+  color: var(--black); margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.hero-sub {
+  font-size: 17px; color: rgba(0,0,0,0.6); max-width: 480px;
+  margin: 0 auto 44px; line-height: 1.6; font-weight: 500;
+}
+
+/* ─── STATS ─── */
+.stats-strip {
+  display: flex; justify-content: center; flex-wrap: wrap;
+  gap: 0; max-width: 600px; margin: 0 auto;
+  background: var(--black); border-radius: 16px; overflow: hidden;
+}
+.stat-item { flex: 1; min-width: 130px; padding: 22px 16px; text-align: center; border-right: 1px solid #222; }
+.stat-item:last-child { border-right: none; }
+.stat-n { font-size: 28px; font-weight: 900; color: var(--green); letter-spacing: -1px; }
+.stat-l { font-size: 10px; color: #555; text-transform: uppercase; letter-spacing: 1px; margin-top: 3px; font-weight: 600; }
+
+/* ─── PRIZES SECTION ─── */
+/* EARN SECTION */
+.earn-section {
+  background: #111;
+  padding: 64px 24px;
+  border-top: 1px solid #222;
+}
+.earn-inner { max-width: 960px; margin: 0 auto; }
+.earn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 12px;
+  margin-top: 32px;
+}
+.earn-grid .earn-highlight {
+  grid-column: span 2;
+  background: var(--green);
+  color: var(--black);
+}
+.earn-card {
+  background: #1a1a1a;
+  border-radius: 16px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.earn-highlight .earn-pts { color: var(--black); font-size: 52px; }
+.earn-highlight .earn-label { color: var(--black); font-size: 16px; font-weight: 700; }
+.earn-highlight .earn-sub { color: rgba(0,0,0,0.55); font-size: 13px; margin-top: 4px; }
+.earn-pts {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--green);
+  line-height: 1;
+}
+.earn-pts.earn-check { font-size: 24px; }
+.earn-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+}
+@media(max-width:700px){
+  .earn-grid { grid-template-columns: 1fr 1fr; }
+  .earn-grid .earn-highlight { grid-column: span 2; }
+}
+
+.prizes-section {
+  background: var(--black);
+  padding: 72px 24px;
+}
+
+.prizes-inner { max-width: 960px; margin: 0 auto; }
+
+.section-eyebrow {
+  font-size: 11px; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--green);
+  margin-bottom: 12px;
+}
+
+.prizes-headline {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 900; font-style: italic;
+  color: #fff; letter-spacing: -2px;
+  text-transform: uppercase;
+  line-height: 1; margin-bottom: 48px;
+}
+.prizes-headline span { color: var(--green); }
+
+/* Prize cards grid */
+.prizes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.prize-card {
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 20px;
+  padding: 28px 20px 24px;
+  display: flex; flex-direction: column;
+  align-items: center; text-align: center;
+  position: relative; overflow: hidden;
+  transition: transform .2s;
+}
+.prize-card:hover { transform: translateY(-4px); }
+
+/* 1st prize — spans full width */
+.prize-card.first {
+  grid-column: 1 / -1;
+  flex-direction: row;
+  text-align: left;
+  padding: 36px 40px;
+  background: linear-gradient(135deg, #131300 0%, #1c1c00 100%);
+  border-color: rgba(200,241,53,0.35);
+  gap: 40px;
+}
+.prize-card.first::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(200,241,53,0.07) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.prize-card.second { border-color: rgba(192,192,192,0.2); }
+.prize-card.third  { border-color: rgba(205,127,50,0.2); }
+.prize-card.jersey { border-color: rgba(200,241,53,0.15); }
+.prize-card.merch  {
+  grid-column: 1 / -1;
+  flex-direction: row; text-align: left;
+  padding: 24px 32px; gap: 20px;
+  background: #0e0e0e;
+}
+
+.prize-pos {
+  font-size: 11px; font-weight: 800; letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.first .prize-pos   { color: var(--green); }
+.second .prize-pos  { color: var(--silver); }
+.third .prize-pos   { color: var(--bronze); }
+.jersey .prize-pos  { color: #e6c800; }
+.merch .prize-pos   { color: var(--muted); }
+
+.prize-img-wrap {
+  flex-shrink: 0;
+}
+
+.prize-emoji-big { font-size: 72px; line-height: 1; display: block; margin-bottom: 16px; }
+.first .prize-emoji-big { font-size: 96px; margin-bottom: 0; }
+
+.prize-title {
+  font-size: 22px; font-weight: 900; color: #fff;
+  letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 6px;
+}
+.first .prize-title { font-size: 30px; color: var(--green); }
+
+.prize-desc { font-size: 13px; color: #666; line-height: 1.55; margin-bottom: 14px; }
+.first .prize-desc { color: #aaa; font-size: 15px; margin-bottom: 18px; }
+
+.prize-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.prize-tag {
+  background: rgba(255,255,255,.06); border: 1px solid #333;
+  border-radius: 100px; padding: 4px 12px;
+  font-size: 11px; font-weight: 600; color: #888;
+}
+.first .prize-tag { background: rgba(200,241,53,.1); border-color: rgba(200,241,53,.25); color: var(--green); }
+
+.prize-place-badge {
+  width: 48px; height: 48px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 14px; align-self: center;
+}
+.merch .prize-place-badge { background: #1a1a1a; border: 1px solid #333; color: #555; }
+
+/* ─── RANKING SECTION ─── */
+.ranking-section {
+  background: var(--green);
+  padding: 72px 24px;
+}
+.ranking-inner { max-width: 960px; margin: 0 auto; }
+
+.section-eyebrow-dark {
+  font-size: 11px; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(0,0,0,0.45);
+  margin-bottom: 12px;
+}
+.earn-section .section-eyebrow-dark {
+  color: var(--green);
+}
+.ranking-headline {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 900; font-style: italic;
+  color: var(--black); letter-spacing: -2px;
+  text-transform: uppercase; line-height: 1; margin-bottom: 48px;
+}
+
+/* ─── PODIUM ─── */
+.podium {
+  display: grid; grid-template-columns: 1fr 1.08fr 1fr;
+  gap: 12px; margin-bottom: 32px; align-items: end;
+}
+
+.pod-card {
+  background: var(--black);
+  border-radius: 20px; padding: 28px 16px 22px;
+  text-align: center; border: 2px solid transparent;
+  transition: transform .2s;
+}
+.pod-card:hover { transform: translateY(-4px); }
+.pod-card.first  { border-color: var(--green); }
+.pod-card.second { border-color: #444; }
+.pod-card.third  { border-color: #333; }
+
+.pod-medal { font-size: 32px; display: block; margin-bottom: 12px; }
+.pod-pos { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
+.pod-card.first  .pod-pos { color: var(--green); }
+.pod-card.second .pod-pos { color: var(--silver); }
+.pod-card.third  .pod-pos { color: var(--bronze); }
+
+.pod-av {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 20px; margin: 0 auto 12px;
+}
+.pod-card.first  .pod-av { background: var(--green); color: var(--black); }
+.pod-card.second .pod-av { background: #333; color: var(--silver); }
+.pod-card.third  .pod-av { background: #2a1a00; color: var(--bronze); }
+
+.pod-name { font-weight: 700; font-size: 14px; color: #fff; margin-bottom: 3px; line-height: 1.3; }
+.pod-loc  { font-size: 12px; color: #555; margin-bottom: 14px; }
+.pod-pts  { font-size: 30px; font-weight: 900; letter-spacing: -1px; }
+.pod-card.first  .pod-pts { color: var(--green); }
+.pod-card.second .pod-pts { color: var(--silver); }
+.pod-card.third  .pod-pts { color: var(--bronze); }
+.pod-pts-lbl { font-size: 11px; color: #555; margin-top: 1px; }
+.pod-refs {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: #1a1a1a; border: 1px solid #2a2a2a;
+  border-radius: 100px; padding: 4px 12px;
+  font-size: 12px; color: #555; margin-top: 10px;
+}
+.pod-refs strong { color: #aaa; }
+
+/* ─── TABLE ─── */
+.tbl-wrap {
+  background: var(--black); border-radius: 20px; overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.2);
+}
+
+.tbl-head {
+  display: grid; grid-template-columns: 52px 1fr 180px 100px 140px;
+  padding: 12px 20px;
+  background: #111; border-bottom: 1px solid #1e1e1e;
+  font-size: 10px; font-weight: 700; color: #444;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+
+.tbl-row {
+  display: grid; grid-template-columns: 52px 1fr 180px 100px 140px;
+  padding: 13px 20px; border-bottom: 1px solid #141414;
+  align-items: center; transition: background .12s;
+}
+.tbl-row:last-child { border-bottom: none; }
+.tbl-row:hover { background: #111; }
+
+.c-rank { font-size: 15px; font-weight: 900; color: #2a2a2a; }
+.c-rank.hi { color: var(--green); }
+
+.c-user { display: flex; align-items: center; gap: 11px; }
+.av-sm {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  background: #1e1e1e; border: 1px solid #2a2a2a;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: #555;
+}
+.u-name  { font-weight: 600; font-size: 14px; color: #fff; }
+.u-email { font-size: 11px; color: #444; margin-top: 1px; }
+
+.c-loc  { font-size: 13px; color: #555; }
+.c-refs { font-size: 13px; color: #555; }
+
+.c-pts-wrap { text-align: right; }
+.c-pts { font-size: 16px; font-weight: 900; color: var(--green); letter-spacing: -0.5px; }
+.bar-track { height: 3px; background: #1e1e1e; border-radius: 2px; margin-top: 4px; }
+.bar-fill  { height: 100%; background: var(--green); border-radius: 2px; opacity: .35; }
+
+.prize-strip {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.3px;
+  padding: 2px 9px; border-radius: 100px; margin-top: 4px;
+}
+.ps-g1     { background: rgba(200,241,53,.12); color: var(--green); border: 1px solid rgba(200,241,53,.2); }
+.ps-silver { background: rgba(192,192,192,.08); color: var(--silver); border: 1px solid rgba(192,192,192,.15); }
+.ps-bronze { background: rgba(205,127,50,.08); color: var(--bronze); border: 1px solid rgba(205,127,50,.15); }
+.ps-jersey { background: rgba(255,220,0,.07); color: #e6c800; border: 1px solid rgba(255,220,0,.12); }
+.ps-merch  { background: rgba(255,255,255,.04); color: #555; border: 1px solid #2a2a2a; }
+
+/* ─── FAB ─── */
+.fab {
+  position: fixed; bottom: 24px; right: 24px; z-index: 50;
+  background: var(--black); color: var(--green);
+  border: none; padding: 13px 22px; border-radius: 100px;
+  font-weight: 800; font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.5);
+  transition: transform .15s;
+}
+.fab:hover { transform: translateY(-2px); }
+#csv-in { display: none; }
+
+/* ─── DROP ─── */
+.drop-ov {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.92); z-index: 200;
+  align-items: center; justify-content: center;
+}
+.drop-ov.on { display: flex; }
+.drop-box {
+  border: 2px dashed var(--green); border-radius: 24px;
+  padding: 64px 96px; text-align: center;
+  background: rgba(200,241,53,.03);
+}
+.drop-t { font-size: 24px; font-weight: 900; color: var(--green); margin-top: 12px; }
+.drop-s { font-size: 14px; color: #555; margin-top: 8px; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--black);
+  text-align: center; padding: 28px;
+  font-size: 12px; color: #333;
+  border-top: 1px solid #1a1a1a;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 720px) {
+  .prizes-grid { grid-template-columns: 1fr; }
+  .prize-card.first  { flex-direction: column; text-align: center; padding: 28px 20px; gap: 20px; }
+  .prize-card.merch  { flex-direction: column; text-align: center; }
+  .podium { gap: 8px; }
+  .pod-card { padding: 18px 10px 16px; }
+  .pod-pts { font-size: 24px; }
+  .tbl-head { display: none; }
+  .tbl-row { grid-template-columns: 44px 1fr 110px; }
+  .c-loc, .c-refs { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="lemon-logo">
+    <div class="lemon-icon">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" fill="none" stroke="#C9FF33" stroke-width="2"/>
+        <path d="M12 6 C8 6 6 9 6 12 C6 15 8 18 12 18 C16 18 18 15 18 12 C18 9 16 6 12 6Z" fill="#C9FF33"/>
+      </svg>
+    </div>
+    <div class="lemon-wordmark">LEMON</div>
+  </div>
+  <a class="nav-cta" href="https://sumatealemon.co" target="_blank">Regístrate →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag"><div class="dot"></div> Competencia en vivo</div>
+  <h1>¿Quién va<br>ganando? 🏆</h1>
+  <p class="hero-sub">Refiere a tus amigos, sube en el ranking y gana premios épicos. Los mejores puestos ganan desde un viaje al debut de Colombia en el Mundial hasta merch exclusivo.</p>
+
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="stat-n" id="s-total">6.623</div>
+      <div class="stat-l">Participantes</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n" id="s-leader">2.286</div>
+      <div class="stat-l">Puntos del líder</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n" id="s-refs">112</div>
+      <div class="stat-l">Máx. referidos</div>
+    </div>
+  </div>
+</section>
+
+<!-- RANKING -->
+<section class="ranking-section">
+  <div class="ranking-inner">
+    <div class="section-eyebrow-dark">🏆 Clasificación</div>
+    <div class="ranking-headline">Ranking<br>Top 50</div>
+
+    <!-- Podium -->
+    <div class="podium" id="podium"></div>
+
+    <!-- Table -->
+    <div class="tbl-wrap">
+      <div class="tbl-head">
+        <div>#</div>
+        <div>Participante</div>
+        <div>Ubicación</div>
+        <div>Referidos</div>
+        <div style="text-align:right">Puntos</div>
+      </div>
+      <div id="tbl-body"></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO EARN -->
+<section class="earn-section">
+  <div class="earn-inner">
+    <div class="section-eyebrow-dark">⚡ Cómo ganar puntos</div>
+    <div class="earn-grid">
+      <div class="earn-card earn-highlight">
+        <div class="earn-pts">+20</div>
+        <div class="earn-label">por cada amigo que refieras</div>
+        <div class="earn-sub">La acción que más puntos da y puedes repetir sin límite</div>
+      </div>
+      <div class="earn-card">
+        <div class="earn-pts">+15</div>
+        <div class="earn-label">Califícanos en la app</div>
+      </div>
+      <div class="earn-card">
+        <div class="earn-pts">+10</div>
+        <div class="earn-label">Descarga la app</div>
+      </div>
+      <div class="earn-card">
+        <div class="earn-pts">+10</div>
+        <div class="earn-label">Conoce más de la Lemon Card</div>
+      </div>
+      <div class="earn-card">
+        <div class="earn-pts">+5</div>
+        <div class="earn-label">Síguenos en Instagram</div>
+      </div>
+      <div class="earn-card">
+        <div class="earn-pts">+5</div>
+        <div class="earn-label">Síguenos en TikTok</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRIZES -->
+<section class="prizes-section">
+  <div class="prizes-inner">
+    <div class="section-eyebrow">🎁 Premios</div>
+    <div class="prizes-headline">¿Te gustaría viajar<br>a alentar <span>a La Sele?</span></div>
+
+    <!-- Row 1: 1st prize full width -->
+    <div class="prize-card first" style="margin-bottom:16px">
+      <div class="prize-img-wrap">
+        <span class="prize-emoji-big">🧳</span>
+      </div>
+      <div class="prize-content">
+        <div class="prize-pos">🥇 1er Puesto</div>
+        <div class="prize-title">Viaje al debut de Colombia en el Mundial</div>
+        <div class="prize-desc">Dos pasajes, hotel y entradas para ver a la Selección Colombia debutar en la Copa Mundial FIFA 2026 el <strong>17 de junio</strong> frente a Uzbekistán en la <strong>Ciudad de México</strong>. Una experiencia única para ti y un acompañante.</div>
+        <div class="prize-tags">
+          <span class="prize-tag">✈️ Vuelos incluidos</span>
+          <span class="prize-tag">🏨 Hotel</span>
+          <span class="prize-tag">🎟️ 2 entradas</span>
+          <span class="prize-tag">🇲🇽 Ciudad de México</span>
+          <span class="prize-tag">📅 17 Jun 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: 2nd & 3rd -->
+    <div class="prizes-grid" style="grid-template-columns:1fr 1fr;margin-bottom:16px">
+      <div class="prize-card second">
+        <span class="prize-emoji-big">📱</span>
+        <div class="prize-pos">🥈 2do Puesto</div>
+        <div class="prize-title">iPhone 17 + USD</div>
+        <div class="prize-desc">El iPhone más nuevo del mercado más cash prize directo en tu Lemon Card.</div>
+      </div>
+      <div class="prize-card third">
+        <span class="prize-emoji-big">📱</span>
+        <div class="prize-pos">🥉 3er Puesto</div>
+        <div class="prize-title">iPhone 17 + USD</div>
+        <div class="prize-desc">El iPhone más nuevo del mercado más cash prize directo en tu Lemon Card.</div>
+      </div>
+    </div>
+
+    <!-- Row 3: 4th, 5th & merch -->
+    <div class="prizes-grid" style="grid-template-columns:1fr 1fr 1fr">
+      <div class="prize-card jersey">
+        <span class="prize-emoji-big" style="font-size:52px">👕</span>
+        <div class="prize-pos">4° Puesto</div>
+        <div class="prize-title">Camiseta oficial + Cash</div>
+        <div class="prize-desc">Camiseta oficial de La Sele más cash prize.</div>
+      </div>
+      <div class="prize-card jersey">
+        <span class="prize-emoji-big" style="font-size:52px">👕</span>
+        <div class="prize-pos">5° Puesto</div>
+        <div class="prize-title">Camiseta oficial + Cash</div>
+        <div class="prize-desc">Camiseta oficial de La Sele más cash prize.</div>
+      </div>
+      <div class="prize-card" style="border-color:#222">
+        <span class="prize-emoji-big" style="font-size:52px">🛍️</span>
+        <div class="prize-pos" style="color:#555">Top 6–50</div>
+        <div class="prize-title" style="font-size:18px">Merch Lemon 🍋</div>
+        <div class="prize-desc">Pack de merch oficial de Lemon Card para todos los del top 50.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAB -->
+<button class="fab" onclick="document.getElementById('csv-in').click()">↑ Actualizar datos</button>
+<input type="file" id="csv-in" accept=".csv" onchange="loadCSV(this)">
+
+<!-- Drop overlay -->
+<div class="drop-ov" id="drop-ov">
+  <div class="drop-box">
+    <div style="font-size:52px">📂</div>
+    <div class="drop-t">Soltá el CSV acá</div>
+    <div class="drop-s">Export de ViralSweep · el ranking se actualiza al instante</div>
+  </div>
+</div>
+
+<footer>Lemon Card Colombia · Waiting List Competition · Actualizado: <span id="fdate">27 Mar 2026</span></footer>
+
+<script>
+const DATA = [{"email":"maryury21869@hotmail.com","first":"Maryury Alejandra","last":"Ramirez Valderrama","location":"Cali Colombia","total":2826,"referrals":139},{"email":"cris.david.sk@gmail.com","first":"Cristian David","last":"Rios","location":"Bogotá Colombia","total":2706,"referrals":133},{"email":"camilovargas1202@hotmail.com","first":"Juan Camilo","last":"Vargas","location":"Cali Colombia","total":1966,"referrals":96},{"email":"romerogerson10@gmail.com","first":"Gerson Oveimar","last":"Romero Rojas","location":"Bucaramanga Colombia","total":926,"referrals":44},{"email":"samueldavidortizpico@gmail.com","first":"Samuel","last":"Ortiz","location":"Bogotá Colombia","total":846,"referrals":40},{"email":"faracardenas080625@hotmail.com","first":"Farid Alejandro","last":"Cardenas","location":"Colombia","total":486,"referrals":22},{"email":"Estebanperezvalentierra@gmail.com","first":"Estedan","last":"Perez Valentierra","location":"Cartagena Colombia","total":406,"referrals":18},{"email":"alegriasjohn8@gmail.com","first":"John Alejandro","last":"Alegrias Lopez","location":"Medellín Colombia","total":326,"referrals":14},{"email":"juanchvd@gmail.com","first":"Juan David","last":"Chacon Vega","location":"Bogotá Colombia","total":326,"referrals":14},{"email":"elgabojeje14@gmail.com","first":"Gabriel Alejandro","last":"Moreno Peña","location":"Bogotá Colombia","total":266,"referrals":11},{"email":"quitianlian@gmail.com","first":"Libardo Andres","last":"Quitian Sinuco","location":"Cali Colombia","total":226,"referrals":9},{"email":"daividmogri@gmail.com","first":"Daivid","last":"Mora Grisales","location":"Bogotá Colombia","total":206,"referrals":8},{"email":"luisrm87601@gmail.com","first":"Luis Eduardo","last":"Rondón Martínez","location":"Barranquilla Colombia","total":206,"referrals":8},{"email":"andresfelipe241906@gmail.com","first":"Andres Felipe","last":"Plata Pinzon","location":"Bucaramanga Colombia","total":186,"referrals":7},{"email":"luismybenitez15@gmail.com","first":"Luis Miguel","last":"Benítez","location":"Sincelejo Colombia","total":186,"referrals":7},{"email":"ivan14hernandez2002@gmail.com","first":"Iván","last":"Hernandez","location":"Sincelejo Colombia","total":186,"referrals":7},{"email":"humcarosocial@gmail.com","first":"Humberto","last":"Cardona Ospina","location":"Colombia","total":166,"referrals":6},{"email":"santiaguu05@gmail.com","first":"Santiago","last":"Gutierrez Uribe","location":"Colombia","total":166,"referrals":6},{"email":"manchegolop@gmail.com","first":"Michael","last":"Manchego","location":"Medellín Colombia","total":166,"referrals":6},{"email":"andresfelipepolo16@gmail.com","first":"Andrés Felipe","last":"Polo Moreno","location":"Medellín Colombia","total":166,"referrals":6},{"email":"elianbuelvas0706@gmail.com","first":"Elian Enrique","last":"Buelvas Olivares","location":"Colombia","total":146,"referrals":5},{"email":"gabrielangel2712@gmail.com","first":"Gabriel","last":"Barrientos","location":"Bogotá Colombia","total":146,"referrals":5},{"email":"rinconmendivelsoj@gmail.com","first":"Juan Camilo","last":"Rincon Mendivelso","location":"Bogotá Colombia","total":146,"referrals":5},{"email":"ivannabenitezromero@gmail.com","first":"Ivanna Sofia","last":"Bentez Romero","location":"Girardota Colombia","total":146,"referrals":5},{"email":"espitiajuanswc@gmail.com","first":"Juan Eduardo","last":"Espitia Rodríguez","location":"Montería Colombia","total":136,"referrals":5},{"email":"moreno.german11@gmail.com","first":"German","last":"Moreno","location":"Bogotá Colombia","total":126,"referrals":4},{"email":"jameddaniel3@gmail.com","first":"Daniel","last":"Prieto","location":"Bucaramanga Colombia","total":126,"referrals":4},{"email":"davidmarrugo777@gmail.com","first":"Moises","last":"Marrugo","location":"Sincelejo Colombia","total":126,"referrals":4},{"email":"majo.corpas@gmail.com","first":"Maria","last":"Corpas","location":"Montería Colombia","total":126,"referrals":4},{"email":"akawhatever2009@gmail.com","first":"Jesús Gabriel","last":"Sanjuán Bueno","location":"Colombia","total":126,"referrals":4},{"email":"carlosbravosoto440@gmail.com","first":"Carlos Emilio","last":"Bravo Soto","location":"Colombia","total":126,"referrals":4},{"email":"mctorresrestrepo@gmail.com","first":"Maria Carolina","last":"Torres Restrepo","location":"Colombia","total":126,"referrals":4},{"email":"malejoduarte03@gmail.com","first":"Manuel","last":"Duarte","location":"Colombia","total":126,"referrals":4},{"email":"carlosetorres12@gmail.com","first":"Carlos","last":"Torres","location":"Colombia","total":126,"referrals":4},{"email":"robertocarlosvergaralarios177@gmail.com","first":"Roberto","last":"Vergara","location":"Colombia","total":126,"referrals":4},{"email":"kellyjomartinez@gmail.com","first":"Kelly Johanna","last":"Martínez Peña","location":"Medellín Colombia","total":126,"referrals":4},{"email":"sebastianramirez2512d@gmail.com","first":"Juan Sebastian","last":"Ramirez Barrios","location":"Cartagena Colombia","total":116,"referrals":4},{"email":"paacho.93@gmail.com","first":"Jose Francisco","last":"Benavides España","location":"Pasto Colombia","total":106,"referrals":3},{"email":"castrillonjuan317@gmail.com","first":"Juan Manuel","last":"Castrillon Florez","location":"Colombia","total":106,"referrals":3},{"email":"sophiamatabajoy333@gmail.com","first":"Anyela Sofia","last":"Matabajoy Erazo","location":"Colombia","total":106,"referrals":3},{"email":"andersonjulianolayagomez@gmail.com","first":"Anderson","last":"Olaya","location":"Bogotá Colombia","total":106,"referrals":3},{"email":"sofiarozo2004@gmail.com","first":"Gisseth Sofia","last":"Rozo Corrales","location":"Bogotá Colombia","total":106,"referrals":3},{"email":"lisclarosan@gmail.com","first":"Lissa","last":"Claros","location":"Palmira Colombia","total":106,"referrals":3},{"email":"mario790419@gmail.com","first":"Juan Esteban","last":"Holguin Salas","location":"Riohacha Colombia","total":106,"referrals":3},{"email":"valencia.1.020.1@gmail.com","first":"Miguel Angel","last":"Valencia Muñoz","location":"Popayán Colombia","total":101,"referrals":3},{"email":"leanhenao@gmail.com","first":"Lewis","last":"Henao Comas","location":"Barranquilla Colombia","total":96,"referrals":3},{"email":"Joseandresosoriopinto@gmail.com","first":"Jose Andres","last":"Osorio Pinto","location":"Cúcuta Colombia","total":86,"referrals":2},{"email":"faibronxd@gmail.com","first":"Faiver Johanson","last":"Gomez Feliciano","location":"Soacha Colombia","total":86,"referrals":2},{"email":"jovanni_12@yahoo.com","first":"Jovanni","last":"Sanchez Alvarado","location":"Bogotá Colombia","total":86,"referrals":2},{"email":"banca.edwingalvez@gmail.com","first":"Edwin Jose","last":"Lopez Galvez","location":"Bogotá Colombia","total":86,"referrals":2}];
+
+function prizeLabel(rank) {
+  if (rank <= 3) return null;
+  if (rank === 4 || rank === 5) return ['ps-jersey','🇨🇴 Camiseta + Cash'];
+  if (rank <= 50) return ['ps-merch','🍋 Merch Lemon'];
+  return null;
+}
+
+function ini(f,l){ return ((f||'')[0]||'').toUpperCase()+((l||'')[0]||'').toUpperCase(); }
+function flag(loc){
+  const l=(loc||'').toLowerCase();
+  if(l.includes('colombia')||l==='co') return '🇨🇴 ';
+  if(l.includes('argentina')) return '🇦🇷 ';
+  if(l.includes('brasil')||l.includes('brazil')) return '🇧🇷 ';
+  return '🌎 ';
+}
+function cleanLoc(l){ if(!l||l.trim()==='CO') return 'Colombia'; return l.replace(/\s+/g,' ').trim(); }
+function fmt(n){ return n.toLocaleString('es-CO'); }
+
+function render(data, total) {
+  const max = data[0]?.total||1;
+  document.getElementById('s-total').textContent = fmt(total||data.length);
+  document.getElementById('s-leader').textContent = fmt(data[0]?.total||0);
+  document.getElementById('s-refs').textContent = fmt(data[0]?.referrals||0);
+
+  // Podium [2nd | 1st | 3rd]
+  const p = data.slice(0,3);
+  const order = [
+    {d:p[1],cls:'second',medal:'🥈',pos:'2° Lugar'},
+    {d:p[0],cls:'first', medal:'🥇',pos:'1° Lugar'},
+    {d:p[2],cls:'third', medal:'🥉',pos:'3° Lugar'},
+  ];
+  document.getElementById('podium').innerHTML = order.map(({d,cls,medal,pos})=>{
+    if(!d) return '<div></div>';
+    const loc=cleanLoc(d.location);
+    return `<div class="pod-card ${cls}">
+      <span class="pod-medal">${medal}</span>
+      <div class="pod-pos">${pos}</div>
+      <div class="pod-av">${ini(d.first,d.last)}</div>
+      <div class="pod-name">${d.first} ${d.last}</div>
+      <div class="pod-loc">${flag(loc)}${loc}</div>
+      <div class="pod-pts">${fmt(d.total)}</div>
+      <div class="pod-pts-lbl">puntos</div>
+      <div class="pod-refs"><strong>${d.referrals}</strong> referidos</div>
+    </div>`;
+  }).join('');
+
+  // Table 4–50
+  document.getElementById('tbl-body').innerHTML = data.slice(3,50).map((d,i)=>{
+    const rank=i+4, loc=cleanLoc(d.location), pct=Math.round(d.total/max*100);
+    const pl=prizeLabel(rank);
+    const prizeHtml=pl?`<div class="prize-strip ${pl[0]}">${pl[1]}</div>`:'';
+    return `<div class="tbl-row">
+      <div class="c-rank ${rank<=10?'hi':''}">${rank}</div>
+      <div class="c-user">
+        <div class="av-sm">${ini(d.first,d.last)}</div>
+        <div>
+          <div class="u-name">${d.first} ${d.last}</div>
+        </div>
+      </div>
+      <div class="c-loc">${flag(loc)}${loc}</div>
+      <div class="c-refs">${d.referrals} refs</div>
+      <div class="c-pts-wrap">
+        <div class="c-pts">${fmt(d.total)}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+        ${prizeHtml}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// CSV parser — handles ViralSweep column-shift bug
+function parseCSV(text){
+  const lines=text.split('\n').filter(l=>l.trim());
+  const rows=[];
+  for(let i=1;i<lines.length;i++){
+    const c=parseLine(lines[i]);
+    if(c.length<10) continue;
+    const shifted=c[12].trim()===''&&(c[13]||'').toLowerCase().includes('full page');
+    const ri=shifted?14:13;
+    const fe=s=>{try{return decodeURIComponent(escape(s||''));}catch(e){return s||'';}};
+    const email=(c[0]||'').trim();
+    if(!email) continue;
+    rows.push({email,first:fe((c[10]||'').trim()),last:fe((c[11]||'').trim()),
+      location:fe((c[2]||'').trim()),total:parseInt(c[9]||'0')||0,referrals:parseInt(c[ri]||'0')||0});
+  }
+  return rows.sort((a,b)=>b.total-a.total);
+}
+function parseLine(line){
+  const cols=[]; let cur='',inq=false;
+  for(const c of line){if(c==='"'){inq=!inq;}else if(c===','&&!inq){cols.push(cur);cur='';}else{cur+=c;}}
+  cols.push(cur); return cols;
+}
+function loadCSV(input){
+  const f=input.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const rows=parseCSV(e.target.result);
+    const now=new Date().toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'});
+    document.getElementById('fdate').textContent=now;
+    render(rows,rows.length);
+  };
+  r.readAsText(f,'ISO-8859-1');
+}
+
+const ov=document.getElementById('drop-ov');
+document.addEventListener('dragover',e=>{e.preventDefault();ov.classList.add('on');});
+document.addEventListener('dragleave',e=>{if(!e.relatedTarget)ov.classList.remove('on');});
+document.addEventListener('drop',e=>{
+  e.preventDefault();ov.classList.remove('on');
+  const f=e.dataTransfer.files[0];
+  if(f?.name.endsWith('.csv')){
+    const r=new FileReader();
+    r.onload=ev=>{
+      const rows=parseCSV(ev.target.result);
+      document.getElementById('fdate').textContent=new Date().toLocaleDateString('es-CO',{day:'2-digit',month:'short',year:'numeric'});
+      render(rows,rows.length);
+    };
+    r.readAsText(f,'ISO-8859-1');
+  }
+});
+
+render(DATA, 10546);
+</script>
+</body>
+</html>
