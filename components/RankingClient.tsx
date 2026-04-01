@@ -76,32 +76,34 @@ function Table({ data }: TableProps) {
       <div className="tbl-head">
         <div>#</div>
         <div>Participante</div>
-        <div>Referidos</div>
-        <div style={{ textAlign: 'right' }}>Puntos</div>
+        <div className="th-center">Referidos</div>
+        <div className="th-right">Puntos</div>
       </div>
       <div>
         {rows.map((d, i) => {
           const rank = i + 4;
           const pct = Math.round((d.total / max) * 100);
           const pl = prizeLabel(rank);
+          const isTop10 = rank <= 10;
           return (
-            <div key={d.email + rank} className="tbl-row">
-              <div className={`c-rank${rank <= 10 ? ' hi' : ''}`}>{rank}</div>
+            <div key={d.email + rank} className={`tbl-row${isTop10 ? ' top10' : ''}`}>
+              <div className={`c-rank${isTop10 ? ' hi' : ''}`}>{rank}</div>
               <div className="c-user">
-                <div className="av-sm">{ini(d.first, d.last)}</div>
-                <div>
+                <div className={`av-sm${isTop10 ? ' av-top' : ''}`}>{ini(d.first, d.last)}</div>
+                <div className="c-user-info">
                   <div className="u-name">{shortName(d.first, d.last)}</div>
+                  {pl && <div className={`prize-strip ${pl[0]}`}>{pl[1]}</div>}
                 </div>
               </div>
-              <div className="c-refs">{d.referrals} refs</div>
+              <div className="c-refs">
+                <span className="c-refs-n">{d.referrals}</span>
+                <span className="c-refs-lbl">refs</span>
+              </div>
               <div className="c-pts-wrap">
                 <div className="c-pts">{fmt(d.total)}</div>
                 <div className="bar-track">
                   <div className="bar-fill" style={{ width: `${pct}%` }} />
                 </div>
-                {pl && (
-                  <div className={`prize-strip ${pl[0]}`}>{pl[1]}</div>
-                )}
               </div>
             </div>
           );
