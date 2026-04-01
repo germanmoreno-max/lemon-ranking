@@ -325,7 +325,7 @@ nav {
 }
 
 .tbl-head {
-  display: grid; grid-template-columns: 56px 1fr 110px 130px;
+  display: grid; grid-template-columns: 56px minmax(0,1fr) 110px 130px;
   padding: 10px 20px;
   background: #0d0d0d; border-bottom: 1px solid #1a1a1a;
   font-size: 10px; font-weight: 700; color: #383838;
@@ -335,7 +335,7 @@ nav {
 .th-right  { text-align: right; }
 
 .tbl-row {
-  display: grid; grid-template-columns: 56px 1fr 110px 130px;
+  display: grid; grid-template-columns: 56px minmax(0,1fr) 110px 130px;
   padding: 12px 20px; border-bottom: 1px solid #0f0f0f;
   align-items: center; transition: background .15s;
   position: relative;
@@ -350,8 +350,8 @@ nav {
   width: 3px; background: var(--green); opacity: .4; border-radius: 0 2px 2px 0;
 }
 
-.c-rank { font-size: 14px; font-weight: 900; color: #252525; padding-left: 4px; }
-.c-rank.hi { color: var(--green); }
+.c-rank { font-size: 14px; font-weight: 900; color: var(--green); padding-left: 4px; opacity: .35; }
+.c-rank.hi { color: var(--green); opacity: 1; }
 
 .c-user { display: flex; align-items: center; gap: 12px; }
 .c-user-info { display: flex; flex-direction: column; gap: 4px; }
@@ -367,7 +367,7 @@ nav {
 .c-refs {
   display: flex; flex-direction: column; align-items: center; gap: 1px;
 }
-.c-refs-n   { font-size: 20px; font-weight: 900; color: #fff; letter-spacing: -0.5px; line-height: 1; }
+.c-refs-n   { font-size: 20px; font-weight: 900; color: var(--green); letter-spacing: -0.5px; line-height: 1; }
 .c-refs-lbl { font-size: 10px; font-weight: 600; color: #333; text-transform: uppercase; letter-spacing: 0.8px; }
 
 .c-pts-wrap { text-align: right; }
