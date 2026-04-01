@@ -418,6 +418,39 @@ nav {
 .drop-t { font-size: 24px; font-weight: 900; color: var(--green); margin-top: 12px; }
 .drop-s { font-size: 14px; color: #555; margin-top: 8px; }
 
+/* ─── FAQ ─── */
+.faq-section {
+  background: #0a0a0a;
+  padding: 72px 24px;
+  border-top: 1px solid #1a1a1a;
+}
+.faq-inner { max-width: 720px; margin: 0 auto; }
+.faq-list { margin-top: 32px; display: flex; flex-direction: column; gap: 2px; }
+.faq-item { border-radius: 12px; overflow: hidden; }
+.faq-q {
+  width: 100%; background: #141414; border: none; cursor: pointer;
+  padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;
+  font-family: inherit; font-size: 15px; font-weight: 600; color: #fff;
+  text-align: left; gap: 16px;
+}
+.faq-q:hover { background: #1a1a1a; }
+.faq-icon { color: var(--green); font-size: 20px; flex-shrink: 0; transition: transform .25s; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a {
+  background: #141414; padding: 0 24px;
+  font-size: 14px; color: #aaa; line-height: 1.7;
+  max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s;
+}
+.faq-item.open .faq-a { max-height: 300px; padding: 0 24px 20px; }
+.faq-a a { color: var(--green); text-decoration: none; }
+.faq-a a:hover { text-decoration: underline; }
+.tc-link {
+  display: block; text-align: center; margin-top: 40px;
+  font-size: 13px; color: #555;
+}
+.tc-link a { color: var(--green); text-decoration: none; }
+.tc-link a:hover { text-decoration: underline; }
+
 /* ─── FOOTER ─── */
 footer {
   background: var(--black);
@@ -598,6 +631,8 @@ footer {
       </div>
     </div>
 
+    <p class="tc-link">¿Tienes dudas sobre las bases? <a href="https://legals.lemon.me/terminos-y-condiciones-waiting-list-colombia/" target="_blank" rel="noopener">Lee los Términos y Condiciones →</a></p>
+
   </div>
 </section>
 
@@ -613,6 +648,64 @@ footer {
     <div class="drop-s">Export de ViralSweep · el ranking se actualiza al instante</div>
   </div>
 </div>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="section-eyebrow-dark" style="color:var(--green)">❓ Preguntas frecuentes</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Cómo acumulo más puntos?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">La forma más poderosa es referir amigos: cada persona que se registre con tu enlace te suma <strong>+20 puntos</strong> y no tiene límite. También puedes ganar puntos completando acciones como calificarnos en la app (+15), descargarla (+10), conocer más de la Lemon Card (+10), seguirnos en Instagram (+5) y en TikTok (+5).</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Dónde encuentro mi enlace de referido?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Tu enlace personalizado te llegó al correo cuando te registraste en <a href="https://sumatealemon.co" target="_blank">sumatealemon.co</a>. También puedes encontrarlo iniciando sesión en la página de la competencia.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Cuándo termina la competencia y cuándo se entregan los premios?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Las fechas exactas de cierre y entrega de premios están detalladas en los <a href="https://legals.lemon.me/terminos-y-condiciones-waiting-list-colombia/" target="_blank">Términos y Condiciones</a>. El ranking se actualiza periódicamente con los datos más recientes de ViralSweep.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Quién puede participar?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">La competencia es exclusiva para residentes en Colombia mayores de 18 años que se hayan registrado en la lista de espera de Lemon Card. Consulta los <a href="https://legals.lemon.me/terminos-y-condiciones-waiting-list-colombia/" target="_blank">Términos y Condiciones</a> para conocer todos los requisitos.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Qué pasa si dos personas tienen el mismo puntaje?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">En caso de empate, se prioriza quien alcanzó el puntaje primero según la fecha y hora de registro de sus entradas en el sistema.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          ¿Qué es la Lemon Card?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Lemon Card es la tarjeta Visa de Lemon, diseñada para colombianos que quieren una forma simple y moderna de manejar su dinero. Regístrate en <a href="https://sumatealemon.co" target="_blank">sumatealemon.co</a> para ser de los primeros en tenerla.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <footer>Lemon Card Colombia · Waiting List Competition · Actualizado: <span id="fdate">27 Mar 2026</span></footer>
 
@@ -741,6 +834,13 @@ document.addEventListener('drop',e=>{
 });
 
 render(DATA, 10546);
+
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
 </script>
 </body>
 </html>
