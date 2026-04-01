@@ -222,8 +222,17 @@ nav {
   flex-shrink: 0;
 }
 
+/* World cup emoji group */
+.prize-world-cup {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 4px; font-size: 52px; line-height: 1;
+}
+.prize-world-cup span:first-child { font-size: 64px; }
+
 .prize-emoji-big { font-size: 72px; line-height: 1; display: block; margin-bottom: 16px; }
 .first .prize-emoji-big { font-size: 96px; margin-bottom: 0; }
+
+.prizes-2col { grid-template-columns: 1fr 1fr; }
 
 .prize-title {
   font-size: 22px; font-weight: 900; color: #fff;
@@ -450,18 +459,61 @@ footer {
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 720px) {
+  /* Nav */
+  nav { padding: 0 16px; }
+
+  /* Hero */
+  .hero { padding: 40px 16px 36px; }
+  .hero h1 { letter-spacing: -2px; margin-bottom: 16px; }
+  .hero-sub { font-size: 15px; margin-bottom: 32px; }
+  .stats-strip { border-radius: 12px; }
+  .stat-item { padding: 18px 12px; min-width: 100px; }
+  .stat-n { font-size: 22px; }
+
+  /* Prizes */
+  .prizes-section { padding: 48px 16px; }
   .prizes-grid { grid-template-columns: 1fr; }
-  .prize-card.first  { flex-direction: column; text-align: center; padding: 28px 20px; gap: 20px; }
+  .prizes-2col  { grid-template-columns: 1fr; }
+  .prize-card.first  { flex-direction: column; text-align: center; padding: 28px 20px; gap: 16px; }
+  .prize-card.first .prize-tags { justify-content: center; }
   .prize-card.merch  { flex-direction: column; text-align: center; }
-  .podium { gap: 8px; }
-  .pod-card { padding: 18px 10px 16px; }
-  .pod-pts { font-size: 24px; }
+  .prize-world-cup { flex-direction: row; font-size: 40px; }
+  .prize-world-cup span:first-child { font-size: 48px; }
+  .first .prize-title { font-size: 22px; }
+
+  /* Earn */
+  .earn-section { padding: 48px 16px; }
+  .earn-grid { grid-template-columns: 1fr 1fr; }
+  .earn-grid .earn-highlight { grid-column: span 2; }
+
+  /* Ranking */
+  .ranking-section { padding: 48px 16px; }
+  .ranking-headline { margin-bottom: 28px; }
+
+  /* Podium */
+  .podium { gap: 6px; }
+  .pod-card { padding: 16px 8px 14px; border-radius: 14px; }
+  .pod-medal { font-size: 24px; margin-bottom: 8px; }
+  .pod-av { width: 40px; height: 40px; font-size: 15px; margin-bottom: 8px; }
+  .pod-name { font-size: 12px; }
+  .pod-pts { font-size: 20px; }
+  .pod-pts-lbl { font-size: 9px; }
+  .pod-refs { font-size: 10px; padding: 3px 8px; margin-top: 6px; }
+
+  /* Table */
+  .tbl-wrap { border-radius: 14px; }
   .tbl-head { display: none; }
-  .tbl-row { padding: 12px 14px; }
-  .c-rank { width: 36px; }
-  .c-stats { width: 160px; }
-  .c-refs { width: 80px; }
-  .c-pts-wrap { width: 80px; }
-  .c-refs-n { font-size: 17px; }
-  .c-pts { font-size: 17px; }
+  .tbl-row { padding: 11px 14px; }
+  .c-rank { width: 32px; font-size: 12px; }
+  .av-sm { width: 34px; height: 34px; font-size: 11px; }
+  .u-name { font-size: 13px; }
+  .c-stats { width: 130px; }
+  .c-refs { width: 65px; }
+  .c-refs-n { font-size: 16px; }
+  .c-refs-lbl { font-size: 9px; }
+  .c-pts-wrap { width: 65px; }
+  .c-pts { font-size: 16px; }
+
+  /* FAQ */
+  .faq-section { padding: 48px 16px; }
 }

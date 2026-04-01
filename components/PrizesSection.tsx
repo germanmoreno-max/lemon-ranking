@@ -9,8 +9,10 @@ export default function PrizesSection() {
 
         {/* 1st prize — full width */}
         <div className="prize-card first" style={{ marginBottom: '16px' }}>
-          <div className="prize-img-wrap">
-            <span className="prize-emoji-big">🧳</span>
+          <div className="prize-img-wrap prize-world-cup">
+            <span>🏆</span>
+            <span>⚽</span>
+            <span>🇨🇴</span>
           </div>
           <div className="prize-content">
             <div className="prize-pos">🥇 1er Puesto · 1 ganador</div>
@@ -31,7 +33,7 @@ export default function PrizesSection() {
         </div>
 
         {/* 2nd & 3rd — side by side */}
-        <div className="prizes-grid" style={{ gridTemplateColumns: '1fr 1fr', marginBottom: '16px' }}>
+        <div className="prizes-grid prizes-2col" style={{ marginBottom: '16px' }}>
           <div className="prize-card second">
             <span className="prize-emoji-big">📱</span>
             <div className="prize-pos">🥈 2do Puesto · 1 ganador</div>
@@ -53,7 +55,7 @@ export default function PrizesSection() {
         </div>
 
         {/* 4th & 5th */}
-        <div className="prizes-grid" style={{ gridTemplateColumns: '1fr 1fr', marginBottom: '16px' }}>
+        <div className="prizes-grid prizes-2col" style={{ marginBottom: '16px' }}>
           <div className="prize-card jersey">
             <span className="prize-emoji-big" style={{ fontSize: '52px' }}>👕</span>
             <div className="prize-pos">4° y 5° Puesto · 2 ganadores</div>
