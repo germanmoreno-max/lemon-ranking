@@ -8,18 +8,6 @@ function ini(f: string, l: string): string {
   return ((f || '')[0] || '').toUpperCase() + ((l || '')[0] || '').toUpperCase();
 }
 
-function flag(loc: string): string {
-  const l = (loc || '').toLowerCase();
-  if (l.includes('colombia') || l === 'co') return '🇨🇴 ';
-  if (l.includes('argentina')) return '🇦🇷 ';
-  if (l.includes('brasil') || l.includes('brazil')) return '🇧🇷 ';
-  return '🌎 ';
-}
-
-function cleanLoc(l: string): string {
-  if (!l || l.trim() === 'CO') return 'Colombia';
-  return l.replace(/\s+/g, ' ').trim();
-}
 
 function fmt(n: number): string {
   return n.toLocaleString('es-CO');
@@ -50,14 +38,12 @@ function Podium({ data }: PodiumProps) {
     <div className="podium">
       {order.map(({ d, cls, medal, pos }, idx) => {
         if (!d) return <div key={idx} />;
-        const loc = cleanLoc(d.location);
         return (
           <div key={idx} className={`pod-card ${cls}`}>
             <span className="pod-medal">{medal}</span>
             <div className="pod-pos">{pos}</div>
             <div className="pod-av">{ini(d.first, d.last)}</div>
             <div className="pod-name">{d.first} {d.last}</div>
-            <div className="pod-loc">{flag(loc)}{loc}</div>
             <div className="pod-pts">{fmt(d.total)}</div>
             <div className="pod-pts-lbl">puntos</div>
             <div className="pod-refs"><strong>{d.referrals}</strong> referidos</div>
@@ -83,14 +69,12 @@ function Table({ data }: TableProps) {
       <div className="tbl-head">
         <div>#</div>
         <div>Participante</div>
-        <div>Ubicación</div>
         <div>Referidos</div>
         <div style={{ textAlign: 'right' }}>Puntos</div>
       </div>
       <div>
         {rows.map((d, i) => {
           const rank = i + 4;
-          const loc = cleanLoc(d.location);
           const pct = Math.round((d.total / max) * 100);
           const pl = prizeLabel(rank);
           return (
@@ -102,7 +86,6 @@ function Table({ data }: TableProps) {
                   <div className="u-name">{d.first} {d.last}</div>
                 </div>
               </div>
-              <div className="c-loc">{flag(loc)}{loc}</div>
               <div className="c-refs">{d.referrals} refs</div>
               <div className="c-pts-wrap">
                 <div className="c-pts">{fmt(d.total)}</div>
