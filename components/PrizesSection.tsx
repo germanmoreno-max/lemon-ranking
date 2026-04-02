@@ -38,19 +38,11 @@ export default function PrizesSection() {
             <span className="prize-emoji-big">📱</span>
             <div className="prize-pos">🥈 2do Puesto · 1 ganador</div>
             <div className="prize-title">iPhone 17 + 500 USD</div>
-            <div className="prize-desc">
-              Gift Card en Falabella Colombia por el valor de un iPhone 17 al momento de la entrega,
-              más <strong>500 USD en USDT</strong> directo en tu Lemon Card.
-            </div>
           </div>
           <div className="prize-card third">
             <span className="prize-emoji-big">📱</span>
             <div className="prize-pos">🥉 3er Puesto · 1 ganador</div>
             <div className="prize-title">iPhone 17 + 250 USD</div>
-            <div className="prize-desc">
-              Gift Card en Falabella Colombia por el valor de un iPhone 17 al momento de la entrega,
-              más <strong>250 USD en USDT</strong> directo en tu Lemon Card.
-            </div>
           </div>
         </div>
 
@@ -60,10 +52,6 @@ export default function PrizesSection() {
             <span className="prize-emoji-big" style={{ fontSize: '52px' }}>👕</span>
             <div className="prize-pos">4° y 5° Puesto · 2 ganadores</div>
             <div className="prize-title">Camiseta Colombia + 100 USD</div>
-            <div className="prize-desc">
-              Camiseta oficial titular de la Selección Colombia (talle L)
-              más <strong>100 USD en USDT</strong>.
-            </div>
           </div>
 
           {/* 6–20 */}
@@ -71,10 +59,6 @@ export default function PrizesSection() {
             <span className="prize-emoji-big" style={{ fontSize: '52px' }}>🛍️</span>
             <div className="prize-pos" style={{ color: '#888' }}>6° al 20° Puesto · 15 ganadores</div>
             <div className="prize-title" style={{ fontSize: '18px' }}>Kit Completo</div>
-            <div className="prize-desc">
-              Kit completo de merchandising oficial:<br />
-              <strong>remera, totebag, gorra y medias</strong>.
-            </div>
           </div>
         </div>
 
@@ -84,9 +68,6 @@ export default function PrizesSection() {
           <div>
             <div className="prize-pos" style={{ color: '#555' }}>21° al 50° Puesto · 30 ganadores</div>
             <div className="prize-title" style={{ fontSize: '18px', color: '#fff' }}>Mini Kit</div>
-            <div className="prize-desc" style={{ margin: 0 }}>
-              Mini kit oficial de Lemon Card: <strong>remera y gorra</strong>.
-            </div>
           </div>
         </div>
 
