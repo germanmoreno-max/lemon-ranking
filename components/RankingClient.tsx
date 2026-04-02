@@ -137,14 +137,20 @@ export default function RankingClient({ initialData, initialTotal, updatedAt }: 
     <>
       {/* Hero stats */}
       <section className="hero">
-        {updatedAt ? (
-          <div className="hero-tag">
-            <div className="dot" />
-            Actualizado: {formatUpdated(updatedAt)}
-          </div>
-        ) : (
-          <div style={{ marginBottom: '28px' }} />
-        )}
+        <div className="hero-update-wrap">
+          {updatedAt ? (
+            <div className="hero-tag">
+              <div className="dot" />
+              Actualizado: {formatUpdated(updatedAt)}
+            </div>
+          ) : (
+            <div className="hero-tag hero-tag-muted">
+              <div className="dot" />
+              Ranking en vivo
+            </div>
+          )}
+          <div className="update-freq">Se actualiza 1-2 veces al día</div>
+        </div>
         <h1>¿Quién va<br />ganando? 🏆</h1>
         <p className="hero-sub">
           Refiere a tus amigos, sube en el ranking y gana premios épicos. Los mejores puestos ganan
@@ -176,9 +182,19 @@ export default function RankingClient({ initialData, initialTotal, updatedAt }: 
         </div>
       </section>
 
-      {/* Footer date */}
+      {/* Footer */}
       <footer>
-        Lemon Card Colombia · Waiting List Competition
+        <div>Lemon Card Colombia · Waiting List Competition</div>
+        <div style={{ marginTop: '6px' }}>
+          <a
+            href="https://legals.lemon.me/terminos-y-condiciones-waiting-list-colombia/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: '#444', textDecoration: 'none' }}
+          >
+            Términos y Condiciones
+          </a>
+        </div>
       </footer>
     </>
   );

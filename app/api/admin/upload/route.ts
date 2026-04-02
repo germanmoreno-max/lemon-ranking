@@ -70,6 +70,12 @@ export async function POST(req: NextRequest) {
     const file = formData.get('csv') as File | null;
     if (!file) return NextResponse.json({ error: 'No file' }, { status: 400 });
 
+    // Use the ViralSweep download time provided by admin, fallback to now
+    const downloadedAtHeader = req.headers.get('x-downloaded-at');
+    const updatedAt = downloadedAtHeader && !isNaN(Date.parse(downloadedAtHeader))
+      ? downloadedAtHeader
+      : new Date().toISOString();
+
     const text = await file.text();
     const { entries, total } = parseCSV(text);
 
@@ -84,7 +90,7 @@ export async function POST(req: NextRequest) {
     const metaPath = path.join(process.cwd(), 'data', 'meta.json');
     await writeFile(metaPath, JSON.stringify({
       total,
-      updatedAt: new Date().toISOString(),
+      updatedAt,
       leader: entries[0] ? `${entries[0].first} ${entries[0].last}` : '',
       leaderPts: entries[0]?.total ?? 0,
     }, null, 2), 'utf-8');

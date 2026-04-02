@@ -98,17 +98,6 @@ const FAQ_ITEMS: FaqItem[] = [
     a: 'El ranking es competitivo: aunque hayas referido nuevas personas, tu posición puede bajar si otros participantes acumularon más puntos que tú en el mismo período. También puede ocurrir que tus referidos aún no hayan completado su registro. ¡Sigue refiriendo! No hay límite de puntos.',
   },
   {
-    q: '¿Cuándo anuncian a los ganadores?',
-    a: (
-      <>
-        La campaña va del <strong>12 de marzo al 6 de abril de 2026</strong> a las 23:59 h. Los
-        ganadores se anuncian el <strong>7 de abril de 2026</strong> en las redes sociales de Lemon.
-        Si resultás ganador, tendrás <strong>72 horas</strong> para confirmar tus datos; de lo
-        contrario, el premio pasa al siguiente en la lista.
-      </>
-    ),
-  },
-  {
     q: '¿Dónde encuentro mi enlace de referido?',
     a: (
       <>
@@ -147,16 +136,6 @@ export default function FaqSection() {
             </div>
           ))}
         </div>
-        <p className="tc-link">
-          ¿Tienes más dudas?{' '}
-          <a
-            href="https://legals.lemon.me/terminos-y-condiciones-waiting-list-colombia/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Lee los Términos y Condiciones →
-          </a>
-        </p>
       </div>
     </section>
   );
