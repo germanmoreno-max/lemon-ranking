@@ -58,6 +58,21 @@ export default async function HomePage() {
       <EarnSection />
       <PrizesSection />
       <FaqSection />
+
+      {/* Footer — always last */}
+      <footer>
+        <div>Lemon Card Colombia · Waiting List Competition</div>
+        <div style={{ marginTop: '6px' }}>
+          <a
+            href="https://legals.lemon.me/terminos-y-condiciones-waiting-list-colombia/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: '#444', textDecoration: 'none' }}
+          >
+            Términos y Condiciones
+          </a>
+        </div>
+      </footer>
     </>
   );
 }
