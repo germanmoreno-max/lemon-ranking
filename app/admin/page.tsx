@@ -21,12 +21,6 @@ export default function AdminPage() {
   const [uploading, setUploading] = useState(false);
   const [result, setResult] = useState<UploadResult | null>(null);
   const [dragging, setDragging] = useState(false);
-  const [downloadedAt, setDownloadedAt] = useState(() => {
-    // Pre-fill with current local datetime in datetime-local format
-    const now = new Date();
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    return now.toISOString().slice(0, 16);
-  });
   const inputRef = useRef<HTMLInputElement>(null);
 
   function handleLogin(e: React.FormEvent) {
@@ -43,11 +37,11 @@ export default function AdminPage() {
     try {
       const fd = new FormData();
       fd.append('csv', f);
-      // Convert local datetime-local value to ISO string
-      const isoDate = downloadedAt ? new Date(downloadedAt).toISOString() : '';
+      // Use the file's own creation timestamp (when ViralSweep exported it)
+      const fileCreatedAt = new Date(f.lastModified).toISOString();
       const res = await fetch('/api/admin/upload', {
         method: 'POST',
-        headers: { 'x-admin-password': password, 'x-downloaded-at': isoDate },
+        headers: { 'x-admin-password': password, 'x-downloaded-at': fileCreatedAt },
         body: fd,
       });
       const json: UploadResult = await res.json();
@@ -118,18 +112,6 @@ export default function AdminPage() {
 
         <h1 style={S.title}>Actualizar Ranking</h1>
         <p style={S.subtitle}>Exporta el CSV desde ViralSweep y súbelo aquí. El ranking público se actualiza al instante.</p>
-
-        {/* Download datetime field */}
-        <div style={S.dateField}>
-          <label style={S.dateLabel}>⏰ Hora de descarga del CSV en ViralSweep</label>
-          <input
-            type="datetime-local"
-            value={downloadedAt}
-            onChange={e => setDownloadedAt(e.target.value)}
-            style={S.dateInput}
-          />
-          <p style={S.dateSub}>Ajusta a la hora exacta en que descargaste el export de ViralSweep.</p>
-        </div>
 
         {/* Drop zone */}
         <div
@@ -256,16 +238,4 @@ const S: Record<string, React.CSSProperties> = {
     display: 'block', textAlign: 'center', color: '#00f068',
     textDecoration: 'none', fontSize: 14, fontWeight: 600,
   },
-  dateField: {
-    background: '#1a1a1a', borderRadius: 12, padding: '16px 20px',
-    marginBottom: 20, border: '1px solid #2a2a2a',
-  },
-  dateLabel: { color: '#aaa', fontSize: 13, fontWeight: 600, display: 'block', marginBottom: 10 },
-  dateInput: {
-    width: '100%', background: '#111', border: '1px solid #333',
-    borderRadius: 8, padding: '10px 14px', color: '#fff',
-    fontSize: 14, boxSizing: 'border-box' as const, outline: 'none',
-    colorScheme: 'dark' as unknown as undefined,
-  },
-  dateSub: { color: '#555', fontSize: 12, margin: '8px 0 0' },
 };
