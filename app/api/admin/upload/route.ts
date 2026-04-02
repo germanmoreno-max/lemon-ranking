@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
       : new Date().toISOString();
 
     const text = await file.text();
-    const { entries, total } = parseCSV(text);
+    const { entries, total, skipped } = parseCSV(text);
 
     if (entries.length === 0) {
       return NextResponse.json({ error: 'No valid entries parsed' }, { status: 400 });
