@@ -27,9 +27,12 @@ function fixLoc(s: string): string {
   return s.replace(/\s{2,}/g, ' ').trim();
 }
 
-function parseCSV(text: string): { entries: RankingEntry[]; total: number } {
+type SkippedEntry = { email: string; rawTotal: string; rawCols: string[] };
+
+function parseCSV(text: string): { entries: RankingEntry[]; total: number; skipped: SkippedEntry[] } {
   const lines = text.split(/\r?\n/).filter(l => l.trim());
   const rows: RankingEntry[] = [];
+  const skipped: SkippedEntry[] = [];
 
   for (let i = 1; i < lines.length; i++) {
     const c = parseLine(lines[i]);
@@ -41,7 +44,8 @@ function parseCSV(text: string): { entries: RankingEntry[]; total: number } {
     const email = (c[0] ?? '').trim();
     if (!email) continue;
 
-    const total = parseInt(c[9] ?? '0') || 0;
+    const rawTotal = (c[9] ?? '').trim();
+    const total = parseInt(rawTotal) || 0;
     const referrals = parseInt(c[ri] ?? '0') || 0;
 
     let first = (c[10] ?? '').trim();
@@ -52,11 +56,15 @@ function parseCSV(text: string): { entries: RankingEntry[]; total: number } {
     try { last = fixName(Buffer.from(last, 'latin1').toString('utf8')); } catch { last = fixName(last); }
     try { location = fixLoc(Buffer.from(location, 'latin1').toString('utf8')); } catch { location = fixLoc(location); }
 
+    if (total === 0) {
+      skipped.push({ email, rawTotal, rawCols: c.slice(0, 16) });
+    }
+
     rows.push({ email, first, last, location, total, referrals });
   }
 
   rows.sort((a, b) => b.total - a.total);
-  return { entries: rows.slice(0, 50), total: rows.length };
+  return { entries: rows.slice(0, 50), total: rows.length, skipped };
 }
 
 export async function POST(req: NextRequest) {
@@ -97,7 +105,7 @@ export async function POST(req: NextRequest) {
 
     revalidatePath('/');
 
-    return NextResponse.json({ ok: true, total, top: entries[0] });
+    return NextResponse.json({ ok: true, total, top: entries[0], skipped });
   } catch (err) {
     console.error(err);
     return NextResponse.json({ error: 'Server error' }, { status: 500 });

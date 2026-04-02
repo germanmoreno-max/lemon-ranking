@@ -10,6 +10,7 @@ type UploadResult = {
   total?: number;
   top?: { first: string; last: string; total: number };
   error?: string;
+  skipped?: Array<{ email: string; rawTotal: string; rawCols: string[] }>;
 };
 
 export default function AdminPage() {
@@ -131,24 +132,37 @@ export default function AdminPage() {
 
         {/* Result */}
         {result && (
-          <div style={{ ...S.resultBox, ...(result.ok ? S.resultOk : S.resultErr) }}>
-            {result.ok ? (
-              <>
-                <span style={S.resultIcon}>✅</span>
-                <div>
-                  <strong>Ranking actualizado correctamente</strong>
-                  <p style={{ margin: '4px 0 0', fontSize: 14, opacity: 0.8 }}>
-                    {result.total?.toLocaleString('es-CO')} participantes · Líder: {result.top?.first} {result.top?.last} ({result.top?.total?.toLocaleString('es-CO')} pts)
-                  </p>
-                </div>
-              </>
-            ) : (
-              <>
-                <span style={S.resultIcon}>❌</span>
-                <div><strong>Error:</strong> {result.error}</div>
-              </>
+          <>
+            <div style={{ ...S.resultBox, ...(result.ok ? S.resultOk : S.resultErr) }}>
+              {result.ok ? (
+                <>
+                  <span style={S.resultIcon}>✅</span>
+                  <div>
+                    <strong>Ranking actualizado correctamente</strong>
+                    <p style={{ margin: '4px 0 0', fontSize: 14, opacity: 0.8 }}>
+                      {result.total?.toLocaleString('es-CO')} participantes · Líder: {result.top?.first} {result.top?.last} ({result.top?.total?.toLocaleString('es-CO')} pts)
+                    </p>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <span style={S.resultIcon}>❌</span>
+                  <div><strong>Error:</strong> {result.error}</div>
+                </>
+              )}
+            </div>
+            {result.skipped && result.skipped.length > 0 && (
+              <div style={S.skippedBox}>
+                <p style={S.skippedTitle}>⚠️ {result.skipped.length} entrada(s) con puntos = 0 (posible error de parseo)</p>
+                {result.skipped.map((s, i) => (
+                  <div key={i} style={S.skippedRow}>
+                    <span style={S.skippedEmail}>{s.email}</span>
+                    <span style={S.skippedMeta}>c[9]=&quot;{s.rawTotal}&quot; · cols[7-12]: [{s.rawCols.slice(7, 13).map(v => `"${v}"`).join(', ')}]</span>
+                  </div>
+                ))}
+              </div>
             )}
-          </div>
+          </>
         )}
 
         {/* Instructions */}
@@ -238,4 +252,12 @@ const S: Record<string, React.CSSProperties> = {
     display: 'block', textAlign: 'center', color: '#00f068',
     textDecoration: 'none', fontSize: 14, fontWeight: 600,
   },
+  skippedBox: {
+    background: 'rgba(255,200,0,0.08)', border: '1px solid rgba(255,200,0,0.3)',
+    borderRadius: 12, padding: '16px 20px', marginBottom: 20,
+  },
+  skippedTitle: { color: '#ffc800', fontWeight: 700, fontSize: 13, margin: '0 0 10px' },
+  skippedRow: { display: 'flex', flexDirection: 'column' as const, gap: 2, marginBottom: 8 },
+  skippedEmail: { color: '#fff', fontSize: 13, fontWeight: 600 },
+  skippedMeta: { color: '#888', fontSize: 11, fontFamily: 'monospace', wordBreak: 'break-all' as const },
 };
