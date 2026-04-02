@@ -323,9 +323,9 @@ nav {
   transition: transform .2s;
 }
 .pod-card:hover { transform: translateY(-4px); }
-.pod-card.first  { border-color: var(--green); }
-.pod-card.second { border-color: #444; }
-.pod-card.third  { border-color: #333; }
+.pod-card.first  { border-color: var(--green); min-height: 340px; }
+.pod-card.second { border-color: #444;         min-height: 280px; }
+.pod-card.third  { border-color: #333;         min-height: 250px; }
 
 .pod-medal { font-size: 32px; display: block; margin-bottom: 12px; }
 .pod-pos { font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 10px; }
@@ -529,6 +529,9 @@ footer {
   /* Podium */
   .podium { gap: 6px; }
   .pod-card { padding: 16px 8px 14px; border-radius: 14px; }
+  .pod-card.first  { min-height: 240px; }
+  .pod-card.second { min-height: 200px; }
+  .pod-card.third  { min-height: 180px; }
   .pod-medal { font-size: 24px; margin-bottom: 8px; }
   .pod-av { width: 40px; height: 40px; font-size: 15px; margin-bottom: 8px; }
   .pod-name { font-size: 12px; }
