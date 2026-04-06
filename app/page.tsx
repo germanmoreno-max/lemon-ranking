@@ -49,7 +49,7 @@ export default async function HomePage() {
           </svg>
         </div>
         <a className="nav-cta" href="https://sumatealemon.co" target="_blank" rel="noopener noreferrer">
-          Regístrate →
+          Regístrate · Inicia sesión
         </a>
       </nav>
 
