@@ -136,6 +136,11 @@ export default function FaqSection() {
             </div>
           ))}
         </div>
+        <p className="tc-link" style={{ marginTop: '32px', color: '#666', fontSize: '14px' }}>
+          ¿Tienes alguna duda? Escríbenos a{' '}
+          <a href="mailto:soporte@lemon.me">soporte@lemon.me</a>{' '}
+          o contáctanos por la app desde la sección <strong style={{ color: '#999' }}>&ldquo;Necesito ayuda&rdquo;</strong>
+        </p>
       </div>
     </section>
   );
