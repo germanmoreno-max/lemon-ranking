@@ -163,7 +163,7 @@ export default function RankingClient({ initialData, initialTotal, updatedAt }: 
         <div className="hero-signup">
           <p className="hero-signup-text">¿Aún no te has sumado?</p>
           <a className="hero-signup-btn" href="https://sumatealemon.co" target="_blank" rel="noopener noreferrer">
-            Regístrate aquí →
+            Súmate aquí →
           </a>
         </div>
         <div className="stats-strip">
