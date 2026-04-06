@@ -10,7 +10,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'Ranking — Lemon Card Colombia',
-  description: 'Refiere a tus amigos, sube en el ranking y gana premios épicos.',
+  description: 'La Lemon Card está llegando a Colombia. Los primeros 1.000 en el ranking obtienen la tarjeta anticipada y los top 50 ganan premios épicos.',
 };
 
 export default function RootLayout({

@@ -153,8 +153,7 @@ export default function RankingClient({ initialData, initialTotal, updatedAt }: 
         </div>
         <h1>¿Quién va<br />ganando? 🏆</h1>
         <p className="hero-sub">
-          Refiere a tus amigos, sube en el ranking y gana premios épicos. Los mejores puestos ganan
-          desde un viaje al debut de Colombia en el Mundial hasta merch exclusivo.
+          La Lemon Card está llegando a Colombia, súmate a la lista de espera. Los primeros 1.000 en el ranking obtendrán la tarjeta de forma anticipada, y los 50 que acumulen más puntos ganarán premios épicos. Desde un viaje al debut de Colombia en el Mundial hasta merch exclusivo de Lemon. Invita a tus amigos, sube posiciones y no te quedes afuera.
         </p>
         <div className="stats-strip">
           <div className="stat-item">
