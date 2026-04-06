@@ -45,7 +45,7 @@ export default async function HomePage() {
             strokeLinejoin="round"
             strokeMiterlimit={2}
           >
-            <path d={LEMON_SVG_PATH} fill="#00f068" fillRule="nonzero" />
+            <path d={LEMON_SVG_PATH} fill="#ABFF3C" fillRule="nonzero" />
           </svg>
         </div>
         <a className="nav-cta" href="https://sumatealemon.co" target="_blank" rel="noopener noreferrer">

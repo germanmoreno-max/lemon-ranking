@@ -77,7 +77,7 @@ export default function AdminPage() {
       <div style={S.page}>
         <div style={S.loginCard}>
           <svg style={S.logo} viewBox="0 0 2000 458" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
-            <path d={LEMON_SVG_PATH} fill="#00f068" fillRule="nonzero" />
+            <path d={LEMON_SVG_PATH} fill="#ABFF3C" fillRule="nonzero" />
           </svg>
           <p style={S.loginSub}>Panel de administración</p>
           <form onSubmit={handleLogin} style={{ width: '100%' }}>
@@ -105,7 +105,7 @@ export default function AdminPage() {
         {/* Header */}
         <div style={S.header}>
           <svg style={{ height: 24, width: 'auto' }} viewBox="0 0 2000 458" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd">
-            <path d={LEMON_SVG_PATH} fill="#00f068" fillRule="nonzero" />
+            <path d={LEMON_SVG_PATH} fill="#ABFF3C" fillRule="nonzero" />
           </svg>
           <span style={S.badge}>Admin</span>
           <button onClick={() => setAuthed(false)} style={S.logoutBtn}>Cerrar sesión</button>
@@ -205,7 +205,7 @@ const S: Record<string, React.CSSProperties> = {
   },
   error: { color: '#ff5555', fontSize: 13, margin: '0 0 8px' },
   btn: {
-    width: '100%', background: '#00f068', color: '#000',
+    width: '100%', background: '#ABFF3C', color: '#000',
     border: 'none', borderRadius: 10, padding: '14px',
     fontSize: 15, fontWeight: 800, cursor: 'pointer',
   },
@@ -217,7 +217,7 @@ const S: Record<string, React.CSSProperties> = {
     display: 'flex', alignItems: 'center', gap: 12, marginBottom: 32,
   },
   badge: {
-    background: 'rgba(0,240,104,0.15)', color: '#00f068',
+    background: 'rgba(171,255,60,0.15)', color: '#ABFF3C',
     borderRadius: 100, padding: '3px 10px', fontSize: 12, fontWeight: 700,
   },
   logoutBtn: {
@@ -232,7 +232,7 @@ const S: Record<string, React.CSSProperties> = {
     textAlign: 'center', cursor: 'pointer', transition: 'all .2s',
     background: '#1a1a1a', marginBottom: 20,
   },
-  dropzoneDrag: { borderColor: '#00f068', background: 'rgba(0,240,104,0.05)' },
+  dropzoneDrag: { borderColor: '#ABFF3C', background: 'rgba(171,255,60,0.05)' },
   dropIcon: { fontSize: 40, marginBottom: 12 },
   dropTitle: { color: '#fff', fontWeight: 600, fontSize: 15, marginBottom: 6 },
   dropSub: { color: '#555', fontSize: 13 },
@@ -240,7 +240,7 @@ const S: Record<string, React.CSSProperties> = {
     borderRadius: 12, padding: '16px 20px', marginBottom: 20,
     display: 'flex', alignItems: 'flex-start', gap: 12,
   },
-  resultOk: { background: 'rgba(0,240,104,0.1)', border: '1px solid rgba(0,240,104,0.3)', color: '#fff' },
+  resultOk: { background: 'rgba(171,255,60,0.1)', border: '1px solid rgba(171,255,60,0.3)', color: '#fff' },
   resultErr: { background: 'rgba(255,85,85,0.1)', border: '1px solid rgba(255,85,85,0.3)', color: '#fff' },
   resultIcon: { fontSize: 20, flexShrink: 0 },
   instructions: {
@@ -249,7 +249,7 @@ const S: Record<string, React.CSSProperties> = {
   instrTitle: { color: '#fff', fontWeight: 700, fontSize: 14, margin: '0 0 12px' },
   instrList: { color: '#888', fontSize: 13, lineHeight: 2, margin: 0, paddingLeft: 20 },
   viewLink: {
-    display: 'block', textAlign: 'center', color: '#00f068',
+    display: 'block', textAlign: 'center', color: '#ABFF3C',
     textDecoration: 'none', fontSize: 14, fontWeight: 600,
   },
   skippedBox: {
