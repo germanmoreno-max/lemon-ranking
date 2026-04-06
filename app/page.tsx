@@ -14,8 +14,10 @@ const LEMON_SVG_PATH =
 async function getRankingData(): Promise<{ entries: RankingEntry[]; total: number; updatedAt: string }> {
   const filePath = path.join(process.cwd(), 'data', 'ranking.json');
   const metaPath = path.join(process.cwd(), 'data', 'meta.json');
-  const raw = await readFile(filePath, 'utf-8');
-  const entries = JSON.parse(raw) as RankingEntry[];
+  let entries: RankingEntry[] = [];
+  try {
+    entries = JSON.parse(await readFile(filePath, 'utf-8')) as RankingEntry[];
+  } catch { /* ranking.json not yet available (empty volume on first deploy) */ }
   let total = entries.length;
   let updatedAt = '';
   try {
