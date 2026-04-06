@@ -151,8 +151,10 @@ export default function RankingClient({ initialData, initialTotal, updatedAt }: 
           )}
           <div className="update-freq">Se actualiza 1-2 veces al día</div>
         </div>
-        <p className="hero-intro">La Lemon Card llega a Colombia</p>
-        <h1>¿Quién va<br />ganando? 🏆</h1>
+        <h1>
+          La Lemon Card llega a Colombia<br />
+          <span className="hero-h1-hook">¿Quién va ganando? 🏆</span>
+        </h1>
         <p className="hero-sub">
           La Lemon Card está llegando a Colombia, súmate a la lista de espera. Los primeros 1.000 en el ranking obtendrán la tarjeta de forma anticipada, y los 50 que acumulen más puntos ganarán premios épicos. Desde un viaje al debut de Colombia en el Mundial hasta merch exclusivo de Lemon. Invita a tus amigos, sube posiciones y no te quedes afuera.
         </p>
