@@ -8,7 +8,7 @@ export default function EarnSection() {
         <div className="earn-grid">
           <div className="earn-card earn-highlight">
             <div className="earn-pts">+20</div>
-            <div className="earn-label">por cada amigo que refieras</div>
+            <div className="earn-label">por cada amigo que invites</div>
             <div className="earn-sub">La acción que más puntos da y puedes repetir sin límite</div>
           </div>
           <div className="earn-card">
