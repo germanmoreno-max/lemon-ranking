@@ -32,6 +32,12 @@ export default function EarnSection() {
             <div className="earn-label">Síguenos en TikTok</div>
           </div>
         </div>
+        <div className="section-cta">
+          <p className="section-cta-text">¿Aún no estás en la lista?</p>
+          <a className="section-cta-btn" href="https://sumatealemon.co" target="_blank" rel="noopener noreferrer">
+            Regístrate aquí →
+          </a>
+        </div>
       </div>
     </section>
   );

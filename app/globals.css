@@ -527,6 +527,29 @@ nav {
 .tc-link a:hover { text-decoration: underline; }
 
 
+/* ─── SECTION CTA ─── */
+.section-cta {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  margin-top: 48px;
+}
+.prizes-cta-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  background: var(--black); padding: 48px 24px;
+}
+.section-cta-text {
+  font-size: 14px; color: rgba(255,255,255,0.4); font-weight: 500;
+}
+.earn-section .section-cta-text { color: rgba(255,255,255,0.4); }
+.section-cta-btn {
+  display: inline-block;
+  background: var(--green); color: var(--black);
+  padding: 14px 32px; border-radius: 100px;
+  font-family: 'Satoshi', 'Inter', sans-serif;
+  font-weight: 800; font-size: 15px; letter-spacing: -0.2px;
+  text-decoration: none; transition: opacity .15s;
+}
+.section-cta-btn:hover { opacity: .85; }
+
 /* ─── FOOTER ─── */
 footer {
   background: var(--black);

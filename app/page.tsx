@@ -59,6 +59,12 @@ export default async function HomePage() {
       {/* Static server-rendered sections */}
       <EarnSection />
       <PrizesSection />
+      <div className="prizes-cta-wrap">
+        <p className="section-cta-text">¿Todavía no te has registrado?</p>
+        <a className="section-cta-btn" href="https://sumatealemon.co" target="_blank" rel="noopener noreferrer">
+          Regístrate aquí →
+        </a>
+      </div>
       <FaqSection />
 
       {/* Footer — always last */}
