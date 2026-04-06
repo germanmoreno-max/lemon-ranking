@@ -87,18 +87,18 @@ nav {
 .hero h1 {
   font-size: clamp(30px, 4.5vw, 56px);
   font-family: 'Satoshi', 'Inter', sans-serif;
-  font-weight: 900; font-style: italic;
-  line-height: 1; letter-spacing: -2px;
+  font-weight: 900; font-style: normal;
+  line-height: 1.05; letter-spacing: -1.5px;
   color: var(--black); margin-bottom: 20px;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .hero-ganando {
   font-size: clamp(20px, 3vw, 30px);
   font-family: 'Satoshi', 'Inter', sans-serif;
   font-weight: 900;
-  font-style: italic;
-  letter-spacing: -1px;
+  font-style: normal;
+  letter-spacing: -0.5px;
   color: var(--black);
   opacity: 0.55;
   margin-bottom: 28px;
@@ -216,10 +216,10 @@ nav {
 .prizes-headline {
   font-size: clamp(32px, 5vw, 56px);
   font-family: 'Satoshi', 'Inter', sans-serif;
-  font-weight: 900; font-style: italic;
-  color: #fff; letter-spacing: -2px;
-  text-transform: uppercase;
-  line-height: 1; margin-bottom: 48px;
+  font-weight: 900; font-style: normal;
+  color: #fff; letter-spacing: -1.5px;
+  text-transform: none;
+  line-height: 1.05; margin-bottom: 48px;
 }
 .prizes-headline span { color: var(--green); }
 
@@ -335,9 +335,9 @@ nav {
 .ranking-headline {
   font-size: clamp(32px, 5vw, 56px);
   font-family: 'Satoshi', 'Inter', sans-serif;
-  font-weight: 900; font-style: italic;
-  color: var(--black); letter-spacing: -2px;
-  text-transform: uppercase; line-height: 1; margin-bottom: 48px;
+  font-weight: 900; font-style: normal;
+  color: var(--black); letter-spacing: -1.5px;
+  text-transform: none; line-height: 1.05; margin-bottom: 48px;
 }
 
 /* ─── PODIUM ─── */
