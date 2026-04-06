@@ -164,6 +164,19 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  text-decoration: none;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.earn-link {
+  cursor: pointer;
+}
+.earn-link:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+  background: #272727;
+}
+.earn-link.earn-highlight:hover {
+  background: #c9ff5a;
 }
 .earn-highlight .earn-pts { color: var(--black); font-size: 52px; }
 .earn-highlight .earn-label { color: var(--black); font-size: 16px; font-weight: 700; }
