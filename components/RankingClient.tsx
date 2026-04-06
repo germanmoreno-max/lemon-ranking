@@ -160,6 +160,12 @@ export default function RankingClient({ initialData, initialTotal, updatedAt }: 
           <br /><br />
           Invita a tus amigos, sube posiciones y no te quedes afuera.
         </p>
+        <div className="hero-signup">
+          <p className="hero-signup-text">¿Aún no te has sumado?</p>
+          <a className="hero-signup-btn" href="https://sumatealemon.co" target="_blank" rel="noopener noreferrer">
+            Regístrate aquí →
+          </a>
+        </div>
         <div className="stats-strip">
           <div className="stat-item">
             <div className="stat-n">{fmt(total)}</div>
