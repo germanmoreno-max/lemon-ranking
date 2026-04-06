@@ -79,7 +79,7 @@ const FAQ_ITEMS: FaqItem[] = [
           sumatealemon.co
         </a>
         , recibirás un enlace personalizado por correo. Compártelo con tus amigos y por cada uno que
-        se registre ganarás <strong>+20 puntos</strong>. No hay límite de referidos.
+        se registre ganarás <strong>+20 puntos</strong>. No hay límite de invitados.
       </>
     ),
   },
@@ -95,10 +95,10 @@ const FAQ_ITEMS: FaqItem[] = [
   },
   {
     q: '¿Por qué bajé de puesto en el ranking si referí a más personas?',
-    a: 'El ranking es competitivo: aunque hayas referido nuevas personas, tu posición puede bajar si otros participantes acumularon más puntos que tú en el mismo período. También puede ocurrir que tus referidos aún no hayan completado su registro. ¡Sigue refiriendo! No hay límite de puntos.',
+    a: 'El ranking es competitivo: aunque hayas invitado nuevas personas, tu posición puede bajar si otros participantes acumularon más puntos que tú en el mismo período. También puede ocurrir que tus invitados aún no hayan completado su registro. ¡Sigue invitando! No hay límite de puntos.',
   },
   {
-    q: '¿Dónde encuentro mi enlace de referido?',
+    q: '¿Dónde encuentro mi enlace de invitado?',
     a: (
       <>
         Tu enlace personalizado te llegó al correo cuando te registraste en{' '}

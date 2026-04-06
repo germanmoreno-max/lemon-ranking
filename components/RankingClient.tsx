@@ -47,7 +47,7 @@ function Podium({ data }: PodiumProps) {
             <div className="pod-name">{shortName(d.first, d.last)}</div>
             <div className="pod-pts">{fmt(d.total)}</div>
             <div className="pod-pts-lbl">puntos</div>
-            <div className="pod-refs"><strong>{d.referrals}</strong> referidos</div>
+            <div className="pod-refs"><strong>{d.referrals}</strong> invitados</div>
           </div>
         );
       })}
@@ -90,7 +90,7 @@ function Table({ data }: TableProps) {
               <div className="c-stats">
                 <div className="c-refs">
                   <span className="c-refs-n">{d.referrals}</span>
-                  <span className="c-refs-lbl">refs</span>
+                  <span className="c-refs-lbl">invitados</span>
                 </div>
                 <div className="c-pts-wrap">
                   <div className="c-pts">{fmt(d.total)}</div>
@@ -173,11 +173,7 @@ export default function RankingClient({ initialData, initialTotal, updatedAt }: 
           </div>
           <div className="stat-item">
             <div className="stat-n">{fmt(leader?.total || 0)}</div>
-            <div className="stat-l">Puntos del líder</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-n">{fmt(maxRefs)}</div>
-            <div className="stat-l">Máx. referidos</div>
+            <div className="stat-l">Puntos del 1er lugar</div>
           </div>
         </div>
       </section>
