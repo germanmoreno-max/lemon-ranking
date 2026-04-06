@@ -156,7 +156,7 @@ export default function RankingClient({ initialData, initialTotal, updatedAt }: 
           <span className="hero-h1-hook">¿Quién va ganando? 🏆</span>
         </h1>
         <p className="hero-sub">
-          Súmate a la lista de espera y sé de los primeros 1.000 en obtener la tarjeta de forma anticipada. Además, los 50 que acumulen más puntos ganarán premios épicos: desde un viaje al debut de Colombia en el Mundial hasta merch exclusivo de Lemon.
+          Súmate a la lista de espera y compite acumulando puntos para ser de los primeros 1.000 en obtener la tarjeta de forma anticipada. Además, los 50 que acumulen más puntos ganarán premios épicos: desde un viaje al debut de Colombia en el Mundial hasta merch exclusivo de Lemon.
           <br /><br />
           Invita a tus amigos, sube posiciones y no te quedes afuera.
         </p>
