@@ -444,8 +444,10 @@ nav {
 
 /* ─── TABLE ─── */
 .tbl-wrap {
-  background: var(--black); border-radius: 20px; overflow: hidden;
+  background: var(--black); border-radius: 20px;
   border: 1px solid #1a1a1a;
+  max-height: 600px; overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: #333 transparent;
 }
 
 .tbl-head {
