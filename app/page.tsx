@@ -45,9 +45,6 @@ export default async function HomePage() {
             <path d={LEMON_SVG_PATH} fill="#ABFF3C" fillRule="nonzero" />
           </svg>
         </div>
-        <a className="nav-cta" href="https://sumatealemon.co" target="_blank" rel="noopener noreferrer">
-          Regístrate · Inicia sesión
-        </a>
       </nav>
 
       {/* Ranking Top 50 */}
