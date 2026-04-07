@@ -1,9 +1,6 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 import RankingClient from '../components/RankingClient';
-import EarnSection from '../components/EarnSection';
-import PrizesSection from '../components/PrizesSection';
-import FaqSection from '../components/FaqSection';
 import { RankingEntry } from '../types';
 
 export const dynamic = 'force-dynamic';
@@ -53,13 +50,8 @@ export default async function HomePage() {
         </a>
       </nav>
 
-      {/* Client component: hero stats + ranking + FAB + footer */}
+      {/* Ranking Top 50 */}
       <RankingClient initialData={data} initialTotal={total} updatedAt={updatedAt} />
-
-      {/* Static server-rendered sections */}
-      <EarnSection />
-      <PrizesSection />
-      <FaqSection />
 
       {/* Footer — always last */}
       <footer>

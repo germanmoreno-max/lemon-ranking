@@ -131,61 +131,32 @@ export default function RankingClient({ initialData, initialTotal, updatedAt }: 
   const total = initialTotal;
 
   const leader = data[0];
-  const maxRefs = data[0]?.referrals || 0;
 
   return (
-    <>
-      {/* Hero stats */}
-      <section className="hero">
-        <div className="hero-update-wrap">
-          {updatedAt ? (
-            <div className="hero-tag">
-              <div className="dot" />
-              Actualizado: {formatUpdated(updatedAt)}
-            </div>
-          ) : (
-            <div className="hero-tag hero-tag-muted">
-              <div className="dot" />
-              Ranking en vivo
-            </div>
-          )}
-          <div className="update-freq">Se actualiza 1-2 veces al día</div>
-        </div>
-        <h1>La Lemon Card llega a Colombia</h1>
-        <p className="hero-sub">
-          Súmate a la lista de espera y compite acumulando puntos para ser de los primeros 1.000 en obtener la tarjeta de forma anticipada. Además, los 50 que acumulen más puntos ganarán premios épicos: desde un viaje al debut de Colombia en el Mundial hasta merch exclusivo de Lemon.
-          <br /><br />
-          Invita a tus amigos, sube posiciones y no te quedes afuera.
-        </p>
-        <div className="hero-signup">
-          <p className="hero-signup-text">¿Aún no te has sumado?</p>
-          <a className="hero-signup-btn" href="https://sumatealemon.co" target="_blank" rel="noopener noreferrer">
-            Súmate aquí →
-          </a>
-        </div>
-        <div className="hero-ganando">¿Quién va ganando? 🏆</div>
-        <div className="stats-strip">
-          <div className="stat-item">
-            <div className="stat-n">{fmt(total)}</div>
-            <div className="stat-l">Participantes</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-n">{fmt(leader?.total || 0)}</div>
-            <div className="stat-l">Puntos del 1er lugar</div>
-          </div>
-        </div>
-      </section>
-
-      {/* Ranking section */}
-      <section className="ranking-section">
-        <div className="ranking-inner">
+    <section className="ranking-section">
+      <div className="ranking-inner">
+        <div className="ranking-header">
           <div className="section-eyebrow-dark">🏆 Clasificación</div>
-          <div className="ranking-headline">Ranking<br />Top 50</div>
-          <Podium data={data} />
-          <Table data={data} />
+          <div className="ranking-headline">Ranking Top 50</div>
+          <div className="ranking-meta">
+            <div className="ranking-stats">
+              <span><strong>{fmt(total)}</strong> participantes</span>
+              <span><strong>{fmt(leader?.total || 0)}</strong> pts · 1er lugar</span>
+            </div>
+            {updatedAt ? (
+              <div className="ranking-updated">
+                <div className="dot" /> Actualizado: {formatUpdated(updatedAt)}
+              </div>
+            ) : (
+              <div className="ranking-updated">
+                <div className="dot" /> Ranking en vivo
+              </div>
+            )}
+          </div>
         </div>
-      </section>
-
-    </>
+        <Podium data={data} />
+        <Table data={data} />
+      </div>
+    </section>
   );
 }

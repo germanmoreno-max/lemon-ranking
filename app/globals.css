@@ -320,9 +320,26 @@ nav {
 /* ─── RANKING SECTION ─── */
 .ranking-section {
   background: var(--green);
-  padding: 72px 24px;
+  padding: 56px 24px 72px;
 }
 .ranking-inner { max-width: 960px; margin: 0 auto; }
+
+.ranking-header { margin-bottom: 48px; }
+.ranking-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px; margin-top: 12px;
+}
+.ranking-stats {
+  display: flex; gap: 20px;
+  font-size: 14px; color: rgba(0,0,0,0.6); font-weight: 500;
+}
+.ranking-updated {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--black); color: var(--green);
+  border-radius: 100px; padding: 6px 14px;
+  font-size: 11px; font-weight: 800; letter-spacing: 1px;
+  text-transform: uppercase;
+}
 
 .section-eyebrow-dark {
   font-size: 11px; font-weight: 800; letter-spacing: 2px;
