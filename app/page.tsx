@@ -30,23 +30,6 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* NAV */}
-      <nav>
-        <div className="lemon-logo">
-          <svg
-            className="lemon-svg-logo"
-            viewBox="0 0 2000 458"
-            xmlns="http://www.w3.org/2000/svg"
-            fillRule="evenodd"
-            clipRule="evenodd"
-            strokeLinejoin="round"
-            strokeMiterlimit={2}
-          >
-            <path d={LEMON_SVG_PATH} fill="#ABFF3C" fillRule="nonzero" />
-          </svg>
-        </div>
-      </nav>
-
       {/* Ranking Top 50 */}
       <RankingClient initialData={data} initialTotal={total} updatedAt={updatedAt} />
 
