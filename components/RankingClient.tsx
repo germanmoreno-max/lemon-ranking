@@ -143,15 +143,13 @@ export default function RankingClient({ initialData, initialTotal, updatedAt }: 
               <span><strong>{fmt(total)}</strong> participantes</span>
               <span><strong>{fmt(leader?.total || 0)}</strong> pts · 1er lugar</span>
             </div>
-            {updatedAt ? (
-              <div className="ranking-updated">
-                <div className="dot" /> Actualizado: {formatUpdated(updatedAt)}
-              </div>
-            ) : (
-              <div className="ranking-updated">
-                <div className="dot" /> Ranking en vivo
-              </div>
-            )}
+            <div className="ranking-updated">
+              <div className="dot" />
+              <span>Ranking en vivo</span>
+              {updatedAt && (
+                <span className="ranking-updated-date">· {formatUpdated(updatedAt)}</span>
+              )}
+            </div>
           </div>
         </div>
         <Podium data={data} />
