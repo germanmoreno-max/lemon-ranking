@@ -145,10 +145,7 @@ export default function RankingClient({ initialData, initialTotal, updatedAt }: 
             </div>
             <div className="ranking-updated">
               <div className="dot" />
-              <span>Ranking en vivo</span>
-              {updatedAt && (
-                <span className="ranking-updated-date">· {formatUpdated(updatedAt)}</span>
-              )}
+              <span>Actualizado: {updatedAt ? formatUpdated(updatedAt) : '—'}</span>
             </div>
           </div>
         </div>
