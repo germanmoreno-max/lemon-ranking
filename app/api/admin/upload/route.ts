@@ -36,13 +36,11 @@ function parseCSV(text: string): { entries: RankingEntry[]; total: number; skipp
 
   const headers = parseLine(lines[0]).map(h => h.trim());
 
-  // Find referrals column from headers (only this one varies between CSV exports)
+  // Find TOTAL REFERRALS column (actual count of people referred, not entries)
   const refIdxFromHeader = headers.findIndex(h =>
-    h.toLowerCase().includes('referr') || h.toLowerCase().includes('refer a friend')
+    h.trim().toLowerCase() === 'total referrals' || h.trim().toLowerCase() === ' total referrals'
   );
-  const refIdx = refIdxFromHeader !== -1
-    ? refIdxFromHeader
-    : (headers[12]?.trim() === '' && (headers[13] ?? '').toLowerCase().includes('full page') ? 14 : 13);
+  const refIdx = refIdxFromHeader !== -1 ? refIdxFromHeader : 14;
 
   for (let i = 1; i < lines.length; i++) {
     const c = parseLine(lines[i]);
@@ -53,8 +51,7 @@ function parseCSV(text: string): { entries: RankingEntry[]; total: number; skipp
 
     const rawTotal = (c[9] ?? '').trim();
     const total = parseInt(rawTotal) || 0;
-    const referralEntries = parseInt(c[refIdx] ?? '0') || 0;
-    const referrals = Math.round(referralEntries / 20);
+    const referrals = parseInt(c[refIdx] ?? '0') || 0;
 
     let first = (c[10] ?? '').trim();
     let last = (c[11] ?? '').trim();
