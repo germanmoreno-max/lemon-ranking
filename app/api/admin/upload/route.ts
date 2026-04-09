@@ -53,7 +53,8 @@ function parseCSV(text: string): { entries: RankingEntry[]; total: number; skipp
 
     const rawTotal = (c[9] ?? '').trim();
     const total = parseInt(rawTotal) || 0;
-    const referrals = parseInt(c[refIdx] ?? '0') || 0;
+    const referralEntries = parseInt(c[refIdx] ?? '0') || 0;
+    const referrals = Math.round(referralEntries / 20);
 
     let first = (c[10] ?? '').trim();
     let last = (c[11] ?? '').trim();
