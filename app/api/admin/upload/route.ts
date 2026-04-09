@@ -29,28 +29,46 @@ function fixLoc(s: string): string {
 
 type SkippedEntry = { email: string; rawTotal: string; rawCols: string[] };
 
-function parseCSV(text: string): { entries: RankingEntry[]; total: number; skipped: SkippedEntry[] } {
+function findColIndex(headers: string[], keywords: string[]): number {
+  return headers.findIndex(h => keywords.some(k => h.toLowerCase().includes(k)));
+}
+
+function parseCSV(text: string): { entries: RankingEntry[]; total: number; skipped: SkippedEntry[]; headers: string[] } {
   const lines = text.split(/\r?\n/).filter(l => l.trim());
   const rows: RankingEntry[] = [];
   const skipped: SkippedEntry[] = [];
+
+  const headers = parseLine(lines[0]).map(h => h.trim());
+
+  // Detect column indices from headers, fall back to hardcoded positions
+  const emailIdx   = findColIndex(headers, ['email']) !== -1 ? findColIndex(headers, ['email']) : 0;
+  const totalIdx   = findColIndex(headers, ['total entries', 'total points', 'entries', 'points', 'total']) !== -1
+    ? findColIndex(headers, ['total entries', 'total points', 'entries', 'points', 'total']) : 9;
+  const firstIdx   = findColIndex(headers, ['first name', 'first']) !== -1 ? findColIndex(headers, ['first name', 'first']) : 10;
+  const lastIdx    = findColIndex(headers, ['last name', 'last']) !== -1 ? findColIndex(headers, ['last name', 'last']) : 11;
+  const locIdx     = findColIndex(headers, ['location', 'city', 'country']) !== -1 ? findColIndex(headers, ['location', 'city', 'country']) : 2;
+  const refIdx     = findColIndex(headers, ['referr', 'invited', 'refer friend', 'amigo']) !== -1
+    ? findColIndex(headers, ['referr', 'invited', 'refer friend', 'amigo'])
+    : (() => {
+        // Legacy fallback: check for column shift
+        const shifted = headers[12]?.trim() === '' && (headers[13] ?? '').toLowerCase().includes('full page');
+        return shifted ? 14 : 13;
+      })();
 
   for (let i = 1; i < lines.length; i++) {
     const c = parseLine(lines[i]);
     if (c.length < 10) continue;
 
-    const shifted = c[12]?.trim() === '' && (c[13] ?? '').toLowerCase().includes('full page');
-    const ri = shifted ? 14 : 13;
-
-    const email = (c[0] ?? '').trim();
+    const email = (c[emailIdx] ?? '').trim();
     if (!email) continue;
 
-    const rawTotal = (c[9] ?? '').trim();
+    const rawTotal = (c[totalIdx] ?? '').trim();
     const total = parseInt(rawTotal) || 0;
-    const referrals = parseInt(c[ri] ?? '0') || 0;
+    const referrals = parseInt(c[refIdx] ?? '0') || 0;
 
-    let first = (c[10] ?? '').trim();
-    let last = (c[11] ?? '').trim();
-    let location = (c[2] ?? '').trim();
+    let first = (c[firstIdx] ?? '').trim();
+    let last = (c[lastIdx] ?? '').trim();
+    let location = (c[locIdx] ?? '').trim();
 
     try { first = fixName(Buffer.from(first, 'latin1').toString('utf8')); } catch { first = fixName(first); }
     try { last = fixName(Buffer.from(last, 'latin1').toString('utf8')); } catch { last = fixName(last); }
@@ -64,7 +82,7 @@ function parseCSV(text: string): { entries: RankingEntry[]; total: number; skipp
   }
 
   rows.sort((a, b) => b.total - a.total);
-  return { entries: rows.slice(0, 50), total: rows.length, skipped };
+  return { entries: rows.slice(0, 50), total: rows.length, skipped, headers };
 }
 
 export async function POST(req: NextRequest) {
@@ -85,7 +103,7 @@ export async function POST(req: NextRequest) {
       : new Date().toISOString();
 
     const text = await file.text();
-    const { entries, total, skipped } = parseCSV(text);
+    const { entries, total, skipped, headers } = parseCSV(text);
 
     if (entries.length === 0) {
       return NextResponse.json({ error: 'No valid entries parsed' }, { status: 400 });
@@ -105,7 +123,7 @@ export async function POST(req: NextRequest) {
 
     revalidatePath('/');
 
-    return NextResponse.json({ ok: true, total, top: entries[0], skipped });
+    return NextResponse.json({ ok: true, total, top: entries[0], skipped, headers });
   } catch (err) {
     console.error(err);
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
