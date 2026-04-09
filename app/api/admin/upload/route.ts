@@ -29,10 +29,6 @@ function fixLoc(s: string): string {
 
 type SkippedEntry = { email: string; rawTotal: string; rawCols: string[] };
 
-function findColIndex(headers: string[], keywords: string[]): number {
-  return headers.findIndex(h => keywords.some(k => h.toLowerCase().includes(k)));
-}
-
 function parseCSV(text: string): { entries: RankingEntry[]; total: number; skipped: SkippedEntry[]; headers: string[] } {
   const lines = text.split(/\r?\n/).filter(l => l.trim());
   const rows: RankingEntry[] = [];
@@ -40,35 +36,28 @@ function parseCSV(text: string): { entries: RankingEntry[]; total: number; skipp
 
   const headers = parseLine(lines[0]).map(h => h.trim());
 
-  // Detect column indices from headers, fall back to hardcoded positions
-  const emailIdx   = findColIndex(headers, ['email']) !== -1 ? findColIndex(headers, ['email']) : 0;
-  const totalIdx   = findColIndex(headers, ['total entries', 'total points', 'entries', 'points', 'total']) !== -1
-    ? findColIndex(headers, ['total entries', 'total points', 'entries', 'points', 'total']) : 9;
-  const firstIdx   = findColIndex(headers, ['first name', 'first']) !== -1 ? findColIndex(headers, ['first name', 'first']) : 10;
-  const lastIdx    = findColIndex(headers, ['last name', 'last']) !== -1 ? findColIndex(headers, ['last name', 'last']) : 11;
-  const locIdx     = findColIndex(headers, ['location', 'city', 'country']) !== -1 ? findColIndex(headers, ['location', 'city', 'country']) : 2;
-  const refIdx     = findColIndex(headers, ['referr', 'invited', 'refer friend', 'amigo']) !== -1
-    ? findColIndex(headers, ['referr', 'invited', 'refer friend', 'amigo'])
-    : (() => {
-        // Legacy fallback: check for column shift
-        const shifted = headers[12]?.trim() === '' && (headers[13] ?? '').toLowerCase().includes('full page');
-        return shifted ? 14 : 13;
-      })();
+  // Find referrals column from headers (only this one varies between CSV exports)
+  const refIdxFromHeader = headers.findIndex(h =>
+    h.toLowerCase().includes('referr') || h.toLowerCase().includes('refer a friend')
+  );
+  const refIdx = refIdxFromHeader !== -1
+    ? refIdxFromHeader
+    : (headers[12]?.trim() === '' && (headers[13] ?? '').toLowerCase().includes('full page') ? 14 : 13);
 
   for (let i = 1; i < lines.length; i++) {
     const c = parseLine(lines[i]);
     if (c.length < 10) continue;
 
-    const email = (c[emailIdx] ?? '').trim();
+    const email = (c[0] ?? '').trim();
     if (!email) continue;
 
-    const rawTotal = (c[totalIdx] ?? '').trim();
+    const rawTotal = (c[9] ?? '').trim();
     const total = parseInt(rawTotal) || 0;
     const referrals = parseInt(c[refIdx] ?? '0') || 0;
 
-    let first = (c[firstIdx] ?? '').trim();
-    let last = (c[lastIdx] ?? '').trim();
-    let location = (c[locIdx] ?? '').trim();
+    let first = (c[10] ?? '').trim();
+    let last = (c[11] ?? '').trim();
+    let location = (c[2] ?? '').trim();
 
     try { first = fixName(Buffer.from(first, 'latin1').toString('utf8')); } catch { first = fixName(first); }
     try { last = fixName(Buffer.from(last, 'latin1').toString('utf8')); } catch { last = fixName(last); }
