@@ -36,12 +36,6 @@ function parseCSV(text: string): { entries: RankingEntry[]; total: number; skipp
 
   const headers = parseLine(lines[0]).map(h => h.trim());
 
-  // Find TOTAL REFERRALS column (actual count of people referred, not entries)
-  const refIdxFromHeader = headers.findIndex(h =>
-    h.trim().toLowerCase() === 'total referrals' || h.trim().toLowerCase() === ' total referrals'
-  );
-  const refIdx = refIdxFromHeader !== -1 ? refIdxFromHeader : 14;
-
   for (let i = 1; i < lines.length; i++) {
     const c = parseLine(lines[i]);
     if (c.length < 10) continue;
@@ -51,6 +45,14 @@ function parseCSV(text: string): { entries: RankingEntry[]; total: number; skipp
 
     const rawTotal = (c[9] ?? '').trim();
     const total = parseInt(rawTotal) || 0;
+
+    // Detect column shift: find which column has the ENTRY SOURCE value ("full page", "embed", etc.)
+    // TOTAL REFERRALS is always the column right after ENTRY SOURCE
+    const entrySourceCol = [13, 14, 15].find(idx =>
+      (c[idx] ?? '').toLowerCase().trim().length > 0 &&
+      !(c[idx] ?? '').trim().match(/^\d+$/)  // not a number → it's a source label
+    ) ?? 13;
+    const refIdx = entrySourceCol + 1;
     const referrals = parseInt(c[refIdx] ?? '0') || 0;
 
     let first = (c[10] ?? '').trim();
