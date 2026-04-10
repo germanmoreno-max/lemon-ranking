@@ -334,14 +334,16 @@ nav {
   font-size: 14px; color: rgba(0,0,0,0.6); font-weight: 500;
 }
 .ranking-updated {
-  display: inline-flex; align-items: center; gap: 7px;
+  display: inline-flex; align-items: center; gap: 9px;
   background: var(--black); color: var(--green);
-  border-radius: 100px; padding: 6px 14px;
-  font-size: 11px; font-weight: 800; letter-spacing: 1px;
+  border-radius: 16px; padding: 12px 20px;
+  font-size: 13px; font-weight: 800; letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 .ranking-updated-date {
-  font-weight: 500; opacity: 0.6; text-transform: none; letter-spacing: 0;
+  font-size: 15px; font-weight: 700;
+  opacity: 1; text-transform: none; letter-spacing: -0.2px;
+  color: #fff;
 }
 
 .section-eyebrow-dark {
