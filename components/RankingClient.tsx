@@ -145,7 +145,7 @@ export default function RankingClient({ initialData, initialTotal, updatedAt }: 
             </div>
             <div className="ranking-updated">
               <div className="dot" />
-              <span>Actualizado: {updatedAt ? formatUpdated(updatedAt) : '—'}</span>
+              <span>Cierre de competencia · 10 Abr 2026, 11:59 p.m.</span>
             </div>
           </div>
         </div>
